@@ -1,44 +1,52 @@
 .header {
   padding: 20px 0;
+  border-bottom: 1px solid rgba(244, 244, 244, 0.1);
 }
-.nav {
+
+.header-container {
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
-.nav-logo {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-.nav-list {
+
+.header-logo {
+  font-size: 18px;
+  font-weight: 600;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 40px;
+  gap: 8px;
 }
+
+.logo-accent {
+  color: var(--white-transparent);
+}
+
+.nav-list {
+  display: flex;
+  gap: 20px;
+}
+
 .nav-link {
-  position: relative;
-  display: block;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  transition: 200ms ease-in;
+  padding: 8px 16px;
+  border-radius: 30px;
+  border: 1px solid transparent;
+  transition: background-color var(--transition-time),
+    border-color var(--transition-time);
 }
-.nav-link:hover,
-.nav-link:focus {
-  color: #747bff;
+
+.nav-link.active {
+  background-color: var(--dark-gray);
+  border-color: var(--white);
 }
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%) translateY(100%);
-  width: 110%;
-  height: 4px;
-  border-radius: 4px;
-  transform-origin: center;
-  animation: stretch 400ms cubic-bezier(0.68, -0.55, 0.27, 1.55) 200ms both;
+
+.header-socials {
+  display: flex;
+  gap: 10px;
 }
-.nav-link.active::after {
-  background: #747bff;
+
+/* Приховуємо соцмережі на мобільному (згідно з вимогами, це буде в бургері, але поки так) */
+@media screen and (max-width: 767px) {
+  .header-socials {
+    display: none;
+  }
 }

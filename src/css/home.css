@@ -1,0 +1,356 @@
+/* Hero Section */
+.hero {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
+.hero-title {
+  font-size: 38px;
+  line-height: 1.1;
+  font-weight: 500;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.hero-italic {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.hero-text {
+  font-size: 14px;
+  line-height: 1.3;
+  color: var(--white-transparent);
+  max-width: 500px;
+}
+
+/* Filters Section */
+.filters {
+  padding-bottom: 32px;
+}
+
+.filters-list {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto; /* Для мобільних, якщо не влазить */
+}
+
+.filters-btn {
+  padding: 8px 16px;
+  border-radius: 30px;
+  border: 1px solid rgba(244, 244, 244, 0.2);
+  color: var(--white-transparent);
+  transition: var(--transition-time) var(--cubic-bezier);
+}
+
+.filters-btn:hover,
+.filters-btn.active {
+  background-color: var(--dark-gray);
+  color: var(--white);
+  border-color: var(--white);
+}
+
+/* Exercises Section */
+.exercises {
+  padding-bottom: 80px;
+}
+
+.exercises-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.exercises-title {
+  font-size: 32px;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+/* Сітка для карток (базова) */
+.exercises-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  min-height: 300px; /* Щоб не стрибало при завантаженні */
+}
+
+.loader-text {
+  width: 100%;
+  text-align: center;
+  padding: 40px;
+  color: var(--white-transparent);
+}
+
+/* Quote of the Day Styles */
+.quote-wrapper {
+  margin-top: 40px;
+  background-color: var(--dark-gray);
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  max-width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .hero-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .quote-wrapper {
+    margin-top: 0;
+    max-width: 450px;
+  }
+}
+
+.quote-heading {
+  font-size: 12px;
+  color: var(--white-transparent);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.quote-text {
+  font-size: 14px;
+  font-style: italic;
+  margin-bottom: 12px;
+  color: var(--white);
+}
+
+.quote-author {
+  font-size: 12px;
+  color: var(--white-transparent);
+  text-align: right;
+  font-weight: 500;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Category Cards Styles */
+.categories-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center; /* Центруємо картки */
+}
+
+.category-card {
+  position: relative;
+  width: 100%;
+  height: 225px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform var(--transition-time) var(--cubic-bezier),
+    box-shadow var(--transition-time);
+  border: 1px solid rgba(244, 244, 244, 0.2);
+}
+
+/* Адаптивність сітки */
+@media screen and (min-width: 375px) {
+  .category-card {
+    width: 335px; /* Мобільна ширина */
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .category-card {
+    width: calc((100% - 20px) / 2); /* 2 картки в ряд */
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .category-card {
+    width: calc((100% - 40px) / 3); /* 3 картки в ряд */
+  }
+}
+
+.category-card:hover,
+.category-card:focus {
+  transform: scale(1.02);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+}
+
+.category-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background-color: rgba(0, 0, 0, 0.3); /* Заглушка поки вантажиться */
+}
+
+.category-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* Текст по центру картки згідно макету */
+}
+
+.category-title {
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--white);
+  text-transform: capitalize;
+  margin-bottom: 4px;
+}
+
+.category-filter {
+  font-size: 12px;
+  color: var(--white-transparent);
+}
+
+/* --- Exercise Card Styles --- */
+.exercise-card {
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  overflow: hidden;
+}
+
+/* Адаптив для вправ */
+@media screen and (min-width: 375px) {
+  .exercise-card {
+    width: 335px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .exercise-card {
+    width: calc((100% - 20px) / 2);
+  }
+}
+@media screen and (min-width: 1200px) {
+  .exercise-card {
+    width: calc((100% - 40px) / 3);
+  }
+}
+
+/* Верхня частина картки (Badge + Rating + Start) */
+.exercise-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.workout-badge {
+  background-color: var(--black);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 7.5px;
+  border-radius: 15px;
+  text-transform: uppercase;
+}
+
+.rating-wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.rating-value {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--black);
+}
+
+.rating-icon {
+  fill: #eea10c; /* Колір зірки */
+}
+
+.start-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--black);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color var(--transition-time);
+}
+
+.start-btn:hover {
+  color: var(--white-transparent); /* Або акцентний колір */
+}
+
+/* Заголовок (Icon + Name) */
+.exercise-title-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.icon-run-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: var(--black);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.icon-run {
+  fill: var(--white);
+}
+
+.exercise-name {
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--black);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: capitalize;
+}
+
+/* Характеристики (Burned calories, Body part, Target) */
+.exercise-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}
+
+.detail-item {
+  font-size: 12px;
+  color: rgba(36, 36, 36, 0.4);
+}
+
+.detail-value {
+  color: var(--black);
+}
+
+/* Навігація в заголовку (Exercises / Body parts / ...) */
+.breadcrumbs {
+  color: var(--white-transparent);
+  font-weight: 400;
+}
+.breadcrumbs-current {
+  color: var(--white-transparent);
+}

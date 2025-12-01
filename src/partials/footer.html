@@ -1,15 +1,33 @@
 <footer class="footer">
-  <div class="container">
-    <p class="footer-desc">
-      Made with ✨ by
-      <a
-        class="footer-link"
-        href="https://goit.global/ua/"
-        target="_blank"
-        rel="noopener noreferrer"
+  <div class="container footer-container">
+    <div class="footer-brand">
+      <a class="footer-logo" href="./index.html"
+        >Your<span class="logo-accent">Energy</span></a
       >
-        GoIT team
-      </a>
-    </p>
+      <p class="footer-tagline">Find your energy inside you</p>
+    </div>
+
+    <div class="footer-content">
+      <form class="subscribe-form" id="subscribe-form">
+        <label class="form-label">
+          <input
+            class="form-input"
+            type="email"
+            name="email"
+            placeholder="example@email.com"
+            required
+            pattern="^[\w+(\.\w+)?]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"
+          />
+        </label>
+        <button class="form-btn" type="submit">Subscribe</button>
+      </form>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="copyright">
+        Made with ✨ by
+        <a href="https://goit.global" target="_blank">GoIT Team</a>
+      </p>
+    </div>
   </div>
 </footer>
