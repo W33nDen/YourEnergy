@@ -1,11 +1,14 @@
 :root {
-  --font-family: 'Montserrat', sans-serif;
+  --font-family: 'DM Sans', sans-serif;
 
-  --black: #1b1b1b;
-  --dark-gray: #242424;
-  --white: #f4f4f4;
-  --white-transparent: rgba(244, 244, 244, 0.6);
-  --accent-color: #f4f4f4;
+  /* Light Theme Palette */
+  --black: #242424; /* Text, Active elements */
+  --white: #f4f4f4; /* Page background */
+  --card-bg: #ffffff; /* Card background */
+  --gray-text: rgba(36, 36, 36, 0.6); /* Secondary text */
+  --border-color: rgba(36, 36, 36, 0.2);
+  --yellow: #eea10c; /* Star rating color */
+  --light-gray: #d9d9d9; /* Empty star color */
 
   --transition-time: 250ms;
   --cubic-bezier: cubic-bezier(0.4, 0, 0.2, 1);
@@ -13,23 +16,10 @@
 
 body {
   font-family: var(--font-family);
-  background-color: var(--black);
-  color: var(--white);
+  background-color: var(--white);
+  color: var(--black);
   line-height: 1.5;
-  font-weight: 400;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
   margin: 0;
-}
-
-main {
-  flex-grow: 1;
 }
 
 img {
@@ -52,7 +42,6 @@ ul {
 button {
   cursor: pointer;
   border: none;
-  background-color: transparent;
+  background: transparent;
   font-family: inherit;
-  padding: 0;
 }

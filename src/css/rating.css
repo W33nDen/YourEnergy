@@ -1,0 +1,103 @@
+/* Rating Modal Styles */
+.rating-modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.rating-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(36, 36, 36, 0.5);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.rating-stars {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.rating-value-display {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.stars-wrapper {
+  display: flex;
+  gap: 2px;
+  flex-direction: row-reverse; /* For CSS-only hover effect if needed, but here we use radio */
+  justify-content: flex-end;
+}
+
+.stars-wrapper input {
+  display: none;
+}
+
+.stars-wrapper label {
+  cursor: pointer;
+  color: rgba(
+    244,
+    244,
+    244,
+    0.2
+  ); /* Inactive color (assuming dark theme or light gray) */
+  /* Actually, let's use a visible inactive color */
+  color: #e4e4e4;
+  transition: color 250ms ease;
+}
+
+.stars-wrapper label svg {
+  fill: currentColor;
+}
+
+/* Star selection logic */
+.stars-wrapper input:checked ~ label,
+.stars-wrapper input:checked + label,
+.stars-wrapper label:hover,
+.stars-wrapper label:hover ~ label {
+  color: #eea10c; /* Gold/Yellow */
+}
+
+.rating-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid rgba(36, 36, 36, 0.2); /* Light border */
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  color: #242424;
+  outline: none;
+  transition: border-color 250ms ease;
+}
+
+.rating-input:focus {
+  border-color: #242424;
+}
+
+.rating-textarea {
+  resize: none;
+  height: 100px;
+}
+
+.btn-send-rating {
+  width: 100%;
+  padding: 12px;
+  background-color: #242424;
+  color: #f4f4f4;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 16px;
+  transition: background-color 250ms ease;
+}
+
+.btn-send-rating:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.btn-send-rating:not(:disabled):hover {
+  background-color: #1b1b1b;
+}

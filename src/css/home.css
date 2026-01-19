@@ -1,15 +1,65 @@
-/* Hero Section */
 .hero {
-  padding-top: 60px;
-  padding-bottom: 40px;
+  padding-top: 40px;
+  padding-bottom: 60px;
+  background-color: var(--white);
+}
+
+/* Верхній ряд: Текст + Хештеги */
+.hero-top-row {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 40px;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .hero-top-row {
+    flex-direction: row;
+  }
+}
+
+.hero-content {
+  max-width: 600px;
+  position: relative;
 }
 
 .hero-title {
-  font-size: 38px;
-  line-height: 1.1;
-  font-weight: 500;
-  margin-bottom: 16px;
+  font-size: 40px;
+  line-height: 1;
+  font-weight: 400;
   letter-spacing: -0.02em;
+  color: var(--black);
+  margin-bottom: 20px;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .hero-title {
+    font-size: 74px;
+  }
+}
+
+/* Sun Icon - inline with title */
+.hero-icon-sun {
+  width: 40px;
+  height: 40px;
+  fill: var(--black);
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+@media (min-width: 768px) {
+  .hero-icon-sun {
+    width: 59px;
+    height: 59px;
+  }
+}
+
+.hero-bold {
+  font-weight: 500;
+  font-style: italic;
 }
 
 .hero-italic {
@@ -18,99 +68,130 @@
 }
 
 .hero-text {
-  font-size: 14px;
-  line-height: 1.3;
-  color: var(--white-transparent);
-  max-width: 500px;
+  color: var(--black);
+  opacity: 0.8;
+  font-size: 16px;
+  max-width: 400px;
 }
 
-/* Filters Section */
-.filters {
-  padding-bottom: 32px;
+/* Блок хештегів та фото */
+.hero-decoration {
+  display: none;
 }
 
-.filters-list {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto; /* Для мобільних, якщо не влазить */
+@media (min-width: 768px) {
+  .hero-decoration {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 16px;
+  }
 }
 
-.filters-btn {
-  padding: 8px 16px;
-  border-radius: 30px;
-  border: 1px solid rgba(244, 244, 244, 0.2);
-  color: var(--white-transparent);
-  transition: var(--transition-time) var(--cubic-bezier);
+/* Кругле фото */
+.decoration-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(36, 36, 36, 0.1);
 }
 
-.filters-btn:hover,
-.filters-btn.active {
-  background-color: var(--dark-gray);
-  color: var(--white);
-  border-color: var(--white);
-}
-
-/* Exercises Section */
-.exercises {
-  padding-bottom: 80px;
-}
-
-.exercises-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 32px;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.exercises-title {
-  font-size: 32px;
-  font-weight: 400;
-  text-transform: capitalize;
-}
-
-/* Сітка для карток (базова) */
-.exercises-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  min-height: 300px; /* Щоб не стрибало при завантаженні */
-}
-
-.loader-text {
+.decoration-photo-img {
   width: 100%;
-  text-align: center;
-  padding: 40px;
-  color: var(--white-transparent);
+  height: 100%;
+  object-fit: cover;
 }
+
+/* Теги */
+.decoration-tags {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.tag {
+  background-color: #ffffff;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-size: 14px;
+  color: var(--black);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.tag:hover {
+  background-color: #e8e8e8;
+}
+
+/* Широкий банер */
+.hero-banner {
+  width: 100%;
+  height: 250px;
+  border-radius: 30px;
+  overflow: hidden;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .hero-banner {
+    height: 400px;
+  }
+}
+
+.hero-img-wide {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Фільтри - стилі перенесено в exercises.css */
+.filters {
+  margin-top: 40px;
+}
+
+/* Старий .categories-filters-btn стиль видалено - фільтри тепер в exercises section */
 
 /* Quote of the Day Styles */
 .quote-wrapper {
   margin-top: 40px;
-  background-color: var(--dark-gray);
+  background-color: var(--black);
   border-radius: 20px;
   padding: 20px;
   display: flex;
+  flex-direction: column;
   gap: 20px;
   max-width: 100%;
+  color: var(--white);
 }
 
 @media screen and (min-width: 768px) {
-  .hero-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
   .quote-wrapper {
-    margin-top: 0;
-    max-width: 450px;
+    flex-direction: row;
+    max-width: none;
+    margin-top: 40px;
   }
+}
+
+.quote-card {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.quote-icon {
+  margin-bottom: 8px;
+}
+
+.quote-icon svg {
+  fill: var(--white);
 }
 
 .quote-heading {
   font-size: 12px;
-  color: var(--white-transparent);
+  color: rgba(244, 244, 244, 0.5);
   text-transform: uppercase;
   margin-bottom: 8px;
   font-weight: 500;
@@ -125,232 +206,29 @@
 
 .quote-author {
   font-size: 12px;
-  color: var(--white-transparent);
+  color: rgba(244, 244, 244, 0.5);
   text-align: right;
   font-weight: 500;
 }
 
-.hidden {
-  display: none !important;
-}
-
-/* Category Cards Styles */
-.categories-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center; /* Центруємо картки */
-}
-
-.category-card {
-  position: relative;
+.quote-image {
   width: 100%;
-  height: 225px;
+  min-height: 200px;
+  background-image: url('../img/quote-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border-radius: 12px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform var(--transition-time) var(--cubic-bezier),
-    box-shadow var(--transition-time);
-  border: 1px solid rgba(244, 244, 244, 0.2);
-}
-
-/* Адаптивність сітки */
-@media screen and (min-width: 375px) {
-  .category-card {
-    width: 335px; /* Мобільна ширина */
-  }
 }
 
 @media screen and (min-width: 768px) {
-  .category-card {
-    width: calc((100% - 20px) / 2); /* 2 картки в ряд */
+  .quote-image {
+    width: 250px;
+    min-height: 250px;
+    flex-shrink: 0;
   }
-}
 
-@media screen and (min-width: 1200px) {
-  .category-card {
-    width: calc((100% - 40px) / 3); /* 3 картки в ряд */
+  .quote-card {
+    padding-right: 20px;
   }
-}
-
-.category-card:hover,
-.category-card:focus {
-  transform: scale(1.02);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
-}
-
-.category-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  background-color: rgba(0, 0, 0, 0.3); /* Заглушка поки вантажиться */
-}
-
-.category-info {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 16px;
-  background: linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.8) 0%,
-    rgba(0, 0, 0, 0.1) 100%
-  );
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%; /* Текст по центру картки згідно макету */
-}
-
-.category-title {
-  font-size: 20px;
-  font-weight: 400;
-  color: var(--white);
-  text-transform: capitalize;
-  margin-bottom: 4px;
-}
-
-.category-filter {
-  font-size: 12px;
-  color: var(--white-transparent);
-}
-
-/* --- Exercise Card Styles --- */
-.exercise-card {
-  width: 100%;
-  background-color: #ffffff;
-  border-radius: 15px;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 16px;
-  overflow: hidden;
-}
-
-/* Адаптив для вправ */
-@media screen and (min-width: 375px) {
-  .exercise-card {
-    width: 335px;
-  }
-}
-@media screen and (min-width: 768px) {
-  .exercise-card {
-    width: calc((100% - 20px) / 2);
-  }
-}
-@media screen and (min-width: 1200px) {
-  .exercise-card {
-    width: calc((100% - 40px) / 3);
-  }
-}
-
-/* Верхня частина картки (Badge + Rating + Start) */
-.exercise-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.workout-badge {
-  background-color: var(--black);
-  color: var(--white);
-  font-size: 12px;
-  font-weight: 500;
-  padding: 5px 7.5px;
-  border-radius: 15px;
-  text-transform: uppercase;
-}
-
-.rating-wrap {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.rating-value {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--black);
-}
-
-.rating-icon {
-  fill: #eea10c; /* Колір зірки */
-}
-
-.start-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  color: var(--black);
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: color var(--transition-time);
-}
-
-.start-btn:hover {
-  color: var(--white-transparent); /* Або акцентний колір */
-}
-
-/* Заголовок (Icon + Name) */
-.exercise-title-box {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.icon-run-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  background-color: var(--black);
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.icon-run {
-  fill: var(--white);
-}
-
-.exercise-name {
-  font-size: 20px;
-  font-weight: 400;
-  color: var(--black);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-transform: capitalize;
-}
-
-/* Характеристики (Burned calories, Body part, Target) */
-.exercise-details {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 16px;
-}
-
-.detail-item {
-  font-size: 12px;
-  color: rgba(36, 36, 36, 0.4);
-}
-
-.detail-value {
-  color: var(--black);
-}
-
-/* Навігація в заголовку (Exercises / Body parts / ...) */
-.breadcrumbs {
-  color: var(--white-transparent);
-  font-weight: 400;
-}
-.breadcrumbs-current {
-  color: var(--white-transparent);
 }

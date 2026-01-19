@@ -1,7 +1,9 @@
 <header class="header">
   <div class="container header-container">
     <a class="header-logo" href="./index.html" aria-label="Logo Your Energy">
-      <span class="logo-text">Your<span class="logo-accent">Energy</span></span>
+      <span class="logo-text"
+        >YOUR <span class="logo-accent">ENERGY</span></span
+      >
     </a>
 
     <nav class="header-nav">
@@ -21,22 +23,109 @@
         target="_blank"
         rel="noreferrer"
         class="social-link"
-        >FB</a
+        aria-label="Facebook"
       >
+        <svg width="20" height="20">
+          <use href="./img/sprite.svg#icon-facebook"></use>
+        </svg>
+      </a>
       <a
         href="https://instagram.com"
         target="_blank"
         rel="noreferrer"
         class="social-link"
-        >IG</a
+        aria-label="Instagram"
       >
+        <svg width="20" height="20">
+          <use href="./img/sprite.svg#icon-instagram"></use>
+        </svg>
+      </a>
       <a
         href="https://youtube.com"
         target="_blank"
         rel="noreferrer"
         class="social-link"
-        >YT</a
+        aria-label="YouTube"
       >
+        <svg width="20" height="20">
+          <use href="./img/sprite.svg#icon-youtube"></use>
+        </svg>
+      </a>
+    </div>
+
+    <button
+      class="burger-menu-btn"
+      type="button"
+      aria-label="Open menu"
+      data-menu-open
+    >
+      <svg class="burger-menu-icon" width="24" height="24">
+        <use href="./img/sprite.svg#icon-burger"></use>
+      </svg>
+    </button>
+  </div>
+
+  <div class="mobile-menu" data-menu>
+    <div class="mobile-menu-container">
+      <a class="header-logo" href="./index.html">
+        <span class="logo-text"
+          >YOUR <span class="logo-accent">ENERGY</span></span
+        >
+      </a>
+      <button
+        class="mobile-menu-close-btn"
+        type="button"
+        aria-label="Close menu"
+        data-menu-close
+      >
+        <svg class="mobile-menu-close-icon" width="20" height="20">
+          <use href="./img/sprite.svg#icon-close"></use>
+        </svg>
+      </button>
+    </div>
+    <ul class="mobile-nav-list">
+      <li class="mobile-nav-item">
+        <a class="mobile-nav-link active" href="./index.html">Home</a>
+      </li>
+      <li class="mobile-nav-item">
+        <a class="mobile-nav-link" href="./favorites.html">Favorites</a>
+      </li>
+    </ul>
+
+    <div class="mobile-socials">
+      <a
+        href="https://facebook.com"
+        target="_blank"
+        rel="noreferrer"
+        class="social-link"
+        aria-label="Facebook"
+      >
+        <svg width="20" height="20">
+          <use href="./img/sprite.svg#icon-facebook"></use>
+        </svg>
+      </a>
+      <a
+        href="https://instagram.com"
+        target="_blank"
+        rel="noreferrer"
+        class="social-link"
+        aria-label="Instagram"
+      >
+        <svg width="20" height="20">
+          <use href="./img/sprite.svg#icon-instagram"></use>
+        </svg>
+      </a>
+      <a
+        href="https://youtube.com"
+        target="_blank"
+        rel="noreferrer"
+        class="social-link"
+        aria-label="YouTube"
+      >
+        <svg width="20" height="20">
+          <use href="./img/sprite.svg#icon-youtube"></use>
+        </svg>
+      </a>
     </div>
   </div>
 </header>

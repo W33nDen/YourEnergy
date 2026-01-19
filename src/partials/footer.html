@@ -1,33 +1,69 @@
 <footer class="footer">
   <div class="container footer-container">
-    <div class="footer-brand">
-      <a class="footer-logo" href="./index.html"
-        >Your<span class="logo-accent">Energy</span></a
-      >
-      <p class="footer-tagline">Find your energy inside you</p>
+    <!-- Top row: heading + subscribe -->
+    <div class="footer-top">
+      <h2 class="footer-heading">Transforming your body shape with us</h2>
+      <div class="footer-subscribe">
+        <p class="subscribe-text">Subscribe and learn about new exercises!</p>
+        <form class="subscribe-form" id="subscribe-form">
+          <label class="form-label">
+            <input
+              class="form-input"
+              type="email"
+              name="email"
+              placeholder="Email"
+              required
+              pattern="^[\w+(\.\w+)?]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"
+            />
+          </label>
+          <button class="form-btn" type="submit">Send</button>
+        </form>
+      </div>
     </div>
 
-    <div class="footer-content">
-      <form class="subscribe-form" id="subscribe-form">
-        <label class="form-label">
-          <input
-            class="form-input"
-            type="email"
-            name="email"
-            placeholder="example@email.com"
-            required
-            pattern="^[\w+(\.\w+)?]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"
-          />
-        </label>
-        <button class="form-btn" type="submit">Subscribe</button>
-      </form>
-    </div>
-
+    <!-- Bottom row: brand + links -->
     <div class="footer-bottom">
-      <p class="copyright">
-        Made with ✨ by
-        <a href="https://goit.global" target="_blank">GoIT Team</a>
-      </p>
+      <div class="footer-brand">
+        <a class="footer-logo" href="./index.html">YOUR ENERGY</a>
+        <div class="footer-socials">
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Instagram"
+          >
+            <svg width="20" height="20" class="footer-social-icon">
+              <use href="./img/sprite.svg#icon-instagram"></use>
+            </svg>
+          </a>
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Facebook"
+          >
+            <svg width="20" height="20" class="footer-social-icon">
+              <use href="./img/sprite.svg#icon-facebook"></use>
+            </svg>
+          </a>
+          <a
+            href="https://youtube.com"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="YouTube"
+          >
+            <svg width="20" height="20" class="footer-social-icon">
+              <use href="./img/sprite.svg#icon-youtube"></use>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="#" class="footer-link">Privacy Policy</a>
+        <span class="footer-divider">/</span>
+        <a href="#" class="footer-link">Terms of Service</a>
+      </div>
+      <p class="copyright">©2023 YourEnergy. All rights reserved.</p>
     </div>
   </div>
 </footer>

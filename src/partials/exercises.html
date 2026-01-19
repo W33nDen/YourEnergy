@@ -1,28 +1,102 @@
 <section class="exercises" id="exercises">
   <div class="container">
     <div class="exercises-header">
-      <h2 class="exercises-title">Exercises</h2>
-
-      <form class="search-form hidden" id="search-form">
-        <input
-          class="search-input"
-          type="text"
-          name="keyword"
-          placeholder="Search"
-          autocomplete="off"
-        />
-        <button class="search-btn" type="submit" aria-label="Search">
-          <svg width="18" height="18">
-            <use href="./img/sprite.svg#icon-search"></use>
-          </svg>
-        </button>
-      </form>
+      <div class="exercises-title-wrap">
+        <h2 class="exercises-title">Exercises</h2>
+        <span class="exercises-category-separator">/</span>
+        <span class="exercises-current-category" id="current-category"></span>
+      </div>
+      <div class="exercises-controls">
+        <form class="search-form" id="search-form">
+          <input
+            class="search-input"
+            type="text"
+            name="keyword"
+            placeholder="Search"
+            autocomplete="off"
+          />
+          <button class="search-btn" type="submit">
+            <svg width="18" height="18">
+              <use href="./img/sprite.svg#icon-search"></use>
+            </svg>
+          </button>
+        </form>
+        <ul class="filters-list" id="filters-list">
+          <li class="filters-item">
+            <button
+              class="filters-btn active"
+              type="button"
+              data-filter="Muscles"
+            >
+              Muscles
+            </button>
+          </li>
+          <li class="filters-item">
+            <button class="filters-btn" type="button" data-filter="Body parts">
+              Body parts
+            </button>
+          </li>
+          <li class="filters-item">
+            <button class="filters-btn" type="button" data-filter="Equipment">
+              Equipment
+            </button>
+          </li>
+        </ul>
+      </div>
     </div>
 
-    <div class="exercises-wrapper" id="exercises-container">
-      <p class="loader-text">Loading...</p>
-    </div>
+    <div class="exercises-layout">
+      <aside class="exercises-sidebar">
+        <div class="quote-wrapper hidden" id="quote-wrapper">
+          <div class="quote-icon">
+            <svg width="20" height="20">
+              <use href="./img/sprite.svg#icon-quote"></use>
+            </svg>
+          </div>
+          <h3 class="quote-heading">Quote of the day</h3>
+          <p class="quote-text" id="quote-text"></p>
+          <p class="quote-author" id="quote-author"></p>
+        </div>
 
-    <div class="pagination" id="pagination"></div>
+        <div class="photo-card">
+          <img
+            src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop"
+            alt="Workout partners"
+            class="photo-card-img"
+          />
+        </div>
+
+        <div class="info-widget">
+          <div class="widget-icon-wrap">
+            <svg width="24" height="24" class="icon-run">
+              <use href="./img/sprite.svg#icon-run"></use>
+            </svg>
+          </div>
+          <div class="widget-text">
+            <p class="widget-title">110 min</p>
+            <p class="widget-desc">Daily norm of sports</p>
+            <p class="widget-description">
+              The World Health Organization recommends at least 150 minutes of
+              moderate-intensity aerobic physical activity throughout the week
+              for adults aged 18-64. However, what happens if we are on the road
+              to reaching the goal of 150 minutes (2.5 hours)? What happens if
+              we only have 30 minutes (or 15, or 45)? Is this still considered
+              moderate-intensity aerobic activity? What are the benefits of a
+              single bout of exercise? Here is where the concept of a 'daily
+              bout' of exercise helps. Exercise specialists usually speak in
+              terms of 'daily bouts' per person to be doing with their daily
+              well-being and overall quality of life.
+            </p>
+          </div>
+        </div>
+      </aside>
+
+      <div class="exercises-main">
+        <div class="exercises-wrapper" id="exercises-container">
+          <p class="loader-text">Loading...</p>
+        </div>
+        <div class="pagination" id="pagination"></div>
+      </div>
+    </div>
   </div>
 </section>

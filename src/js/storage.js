@@ -37,3 +37,29 @@ export const remove = key => {
     console.error('Remove state error: ', error.message);
   }
 };
+
+// Favorites helpers
+const FAVORITES_KEY = 'favorites';
+
+export function getFavorites() {
+  return load(FAVORITES_KEY) || [];
+}
+
+export function addFavorite(exercise) {
+  const favorites = getFavorites();
+  if (!favorites.some(item => item._id === exercise._id)) {
+    favorites.push(exercise);
+    save(FAVORITES_KEY, favorites);
+  }
+}
+
+export function removeFavorite(id) {
+  const favorites = getFavorites();
+  const filtered = favorites.filter(item => item._id !== id);
+  save(FAVORITES_KEY, filtered);
+}
+
+export function isFavorite(id) {
+  const favorites = getFavorites();
+  return favorites.some(item => item._id === id);
+}

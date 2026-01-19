@@ -1,0 +1,248 @@
+import { YourEnergyAPI } from './api.js';
+import * as storage from './storage.js';
+import { showToast } from './toast.js';
+
+const api = new YourEnergyAPI();
+
+const elements = {
+  exerciseModalBackdrop: document.querySelector('[data-modal]'),
+  exerciseModalContent: document.getElementById('exercise-modal-content'),
+  exerciseModalCloseBtn: document.querySelector('[data-modal-close]'),
+  ratingModalBackdrop: document.querySelector('[data-rating-modal]'),
+  ratingModalContent: document.getElementById('rating-modal-content'),
+  ratingModalCloseBtn: document.querySelector('[data-rating-modal-close]'),
+  ratingForm: document.getElementById('rating-form'),
+  ratingStars: document.getElementById('rating-stars'),
+  ratingValueSpan: document.querySelector('.rating-value'),
+  exercisesContainer: document.getElementById('exercises-container'),
+};
+
+let currentExerciseId = null;
+let currentRating = 0;
+
+export function initModals() {
+  elements.exercisesContainer.addEventListener('click', handleCardClick);
+  elements.exerciseModalCloseBtn.addEventListener('click', closeExerciseModal);
+  elements.ratingModalCloseBtn.addEventListener('click', closeRatingModal);
+  elements.ratingStars.addEventListener('click', handleRatingStarsClick);
+  elements.ratingForm.addEventListener('submit', handleRatingSubmit);
+
+  // Close with backdrop click
+  elements.exerciseModalBackdrop.addEventListener('click', handleBackdropClick);
+  elements.ratingModalBackdrop.addEventListener('click', handleBackdropClick);
+
+  // Close with Escape key
+  document.addEventListener('keydown', handleKeyDown);
+}
+
+function handleBackdropClick(event) {
+  if (event.target === elements.exerciseModalBackdrop) {
+    closeExerciseModal();
+  }
+  if (event.target === elements.ratingModalBackdrop) {
+    closeRatingModal();
+  }
+}
+
+function handleKeyDown(event) {
+  if (event.key === 'Escape') {
+    if (!elements.exerciseModalBackdrop.classList.contains('is-hidden')) {
+      closeExerciseModal();
+    }
+    if (!elements.ratingModalBackdrop.classList.contains('is-hidden')) {
+      closeRatingModal();
+    }
+  }
+}
+
+async function handleCardClick(event) {
+  const startBtn = event.target.closest('.start-btn');
+  if (!startBtn) return;
+
+  const exerciseId = startBtn.dataset.id;
+  if (exerciseId) {
+    await openExerciseModal(exerciseId);
+  }
+}
+
+async function openExerciseModal(exerciseId) {
+  currentExerciseId = exerciseId;
+  elements.exerciseModalContent.innerHTML =
+    '<p class="loader-text">Loading exercise details...</p>';
+  elements.exerciseModalBackdrop.classList.remove('is-hidden');
+
+  try {
+    const exerciseDetails = await api.getExerciseById(exerciseId);
+    renderExerciseDetails(exerciseDetails);
+  } catch (error) {
+    console.error('Error fetching exercise details:', error);
+    elements.exerciseModalContent.innerHTML =
+      '<p class="loader-text" style="color: red">Failed to load exercise details.</p>';
+  }
+}
+
+function closeExerciseModal() {
+  elements.exerciseModalBackdrop.classList.add('is-hidden');
+  elements.exerciseModalContent.innerHTML = ''; // Clear content
+  currentExerciseId = null;
+}
+
+function renderStars(rating) {
+  let starsMarkup = '';
+  const fullStars = Math.floor(rating);
+  const hasHalfStar = rating % 1 !== 0;
+
+  for (let i = 0; i < 5; i++) {
+    if (i < fullStars) {
+      starsMarkup += `<svg class="star-icon filled" width="14" height="14"><use href="./img/sprite.svg#icon-star"></use></svg>`;
+    } else if (hasHalfStar && i === fullStars) {
+      // This template doesn't have half stars, so we'll just use full for simplicity or leave empty
+      starsMarkup += `<svg class="star-icon" width="14" height="14"><use href="./img/sprite.svg#icon-star"></use></svg>`;
+    } else {
+      starsMarkup += `<svg class="star-icon" width="14" height="14"><use href="./img/sprite.svg#icon-star"></use></svg>`;
+    }
+  }
+  return starsMarkup;
+}
+
+function renderExerciseDetails(exercise) {
+  const markup = `
+    <div class="modal-exercise-card">
+      <img class="modal-exercise-img" src="${exercise.gifUrl}" alt="${exercise.name}">
+      <div class="modal-exercise-info">
+        <h3 class="modal-exercise-name">${exercise.name}</h3>
+        <div class="modal-rating-wrap">
+          <span class="modal-rating-value">${exercise.rating.toFixed(1)}</span>
+          <div class="modal-stars">
+            ${renderStars(exercise.rating)}
+          </div>
+        </div>
+        <ul class="modal-exercise-details-list">
+          <li class="modal-detail-item">
+            <p class="modal-detail-label">Target:</p>
+            <p class="modal-detail-value">${exercise.target}</p>
+          </li>
+          <li class="modal-detail-item">
+            <p class="modal-detail-label">Body Part:</p>
+            <p class="modal-detail-value">${exercise.bodyPart}</p>
+          </li>
+          <li class="modal-detail-item">
+            <p class="modal-detail-label">Equipment:</p>
+            <p class="modal-detail-value">${exercise.equipment}</p>
+          </li>
+          <li class="modal-detail-item">
+            <p class="modal-detail-label">Popular:</p>
+            <p class="modal-detail-value">${exercise.popularity}</p>
+          </li>
+          <li class="modal-detail-item">
+            <p class="modal-detail-label">Burned Calories:</p>
+            <p class="modal-detail-value">${exercise.burnedCalories} / ${exercise.time} min</p>
+          </li>
+        </ul>
+        <p class="modal-exercise-description">${exercise.description}</p>
+        <div class="modal-buttons">
+          <button class="add-to-favorites-btn" type="button" data-id="${exercise._id}">Add to favorites</button>
+          <button class="give-rating-btn" type="button" data-id="${exercise._id}">Give a rating</button>
+        </div>
+      </div>
+    </div>
+  `;
+  elements.exerciseModalContent.innerHTML = markup;
+
+  const giveRatingBtn =
+    elements.exerciseModalContent.querySelector('.give-rating-btn');
+  if (giveRatingBtn) {
+    giveRatingBtn.addEventListener('click', openRatingModal);
+  }
+
+  // Add to favorites button logic
+  const addBtn = elements.exerciseModalContent.querySelector(
+    '.add-to-favorites-btn'
+  );
+  if (addBtn) {
+    const isFav = storage.isFavorite(exercise._id);
+    addBtn.textContent = isFav ? 'Remove from favorites' : 'Add to favorites';
+    addBtn.addEventListener('click', () =>
+      handleFavoriteToggle(exercise, addBtn)
+    );
+  }
+}
+
+function handleFavoriteToggle(exercise, button) {
+  const isFav = storage.isFavorite(exercise._id);
+  if (isFav) {
+    storage.removeFavorite(exercise._id);
+    showToast('Removed from favorites', 'success');
+    button.textContent = 'Add to favorites';
+  } else {
+    storage.addFavorite(exercise);
+    showToast('Added to favorites!', 'success');
+    button.textContent = 'Remove from favorites';
+  }
+}
+
+function openRatingModal() {
+  if (!currentExerciseId) return;
+  closeExerciseModal();
+  elements.ratingModalBackdrop.classList.remove('is-hidden');
+  currentRating = 0; // Reset rating
+  updateRatingStars();
+  elements.ratingForm.reset();
+}
+
+function closeRatingModal() {
+  elements.ratingModalBackdrop.classList.add('is-hidden');
+  // Optionally re-open exercise modal after rating
+  // if (currentExerciseId) { openExerciseModal(currentExerciseId); }
+}
+
+function handleRatingStarsClick(event) {
+  const star = event.target.closest('.star-icon');
+  if (!star) return;
+
+  currentRating = parseInt(star.dataset.rating);
+  updateRatingStars();
+}
+
+function updateRatingStars() {
+  const stars = elements.ratingStars.querySelectorAll('.star-icon');
+  elements.ratingValueSpan.textContent = currentRating.toFixed(1);
+
+  stars.forEach((star, index) => {
+    if (index < currentRating) {
+      star.classList.add('filled');
+    } else {
+      star.classList.remove('filled');
+    }
+  });
+}
+
+async function handleRatingSubmit(event) {
+  event.preventDefault();
+  const formData = new FormData(elements.ratingForm);
+  const email = formData.get('email');
+  const review = formData.get('review');
+
+  if (!currentExerciseId || currentRating === 0 || !email) {
+    showToast('Please provide a rating and your email.', 'error');
+    return;
+  }
+
+  try {
+    const response = await api.addRating(currentExerciseId, {
+      rate: currentRating,
+      email,
+      review,
+    });
+    showToast('Thank you for your rating!', 'success');
+    closeRatingModal();
+    // Optionally re-open exercise modal with updated rating
+    // await openExerciseModal(currentExerciseId);
+  } catch (error) {
+    console.error('Error submitting rating:', error);
+    showToast(
+      'Failed to submit rating. ' + (error.message || 'Please try again.'),
+      'error'
+    );
+  }
+}

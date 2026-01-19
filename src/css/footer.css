@@ -1,27 +1,68 @@
+/* Footer - matches Figma design */
 .footer {
-  padding: 40px 0;
-  border-top: 1px solid rgba(244, 244, 244, 0.1);
-  margin-top: auto; /* Притискає футер до низу */
+  padding: 64px 0 32px;
+  background-color: var(--black);
+  color: var(--white);
 }
 
 .footer-container {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 64px;
+}
+
+/* Top section: heading + subscribe */
+.footer-top {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
 @media screen and (min-width: 768px) {
-  .footer-container {
+  .footer-top {
     flex-direction: row;
-    flex-wrap: wrap;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: flex-start;
+    gap: 80px;
   }
 }
 
-.footer-tagline {
-  margin-top: 10px;
-  color: var(--white-transparent);
+.footer-heading {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+  max-width: 340px;
+}
+
+@media screen and (min-width: 768px) {
+  .footer-heading {
+    font-size: 40px;
+    max-width: 400px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .footer-heading {
+    font-size: 48px;
+    max-width: 500px;
+  }
+}
+
+/* Subscribe section */
+.footer-subscribe {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 400px;
+}
+
+.subscribe-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
 }
 
 .subscribe-form {
@@ -33,35 +74,147 @@
 @media screen and (min-width: 768px) {
   .subscribe-form {
     flex-direction: row;
+    gap: 8px;
   }
 }
 
+.form-label {
+  flex-grow: 1;
+}
+
 .form-input {
-  padding: 12px 16px;
+  width: 100%;
+  padding: 14px 20px;
   border-radius: 30px;
-  border: 1px solid var(--white-transparent);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   background-color: transparent;
   color: var(--white);
   font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+  border-color: var(--white);
+}
+
+.form-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .form-btn {
-  padding: 12px 24px;
+  padding: 14px 32px;
   border-radius: 30px;
   background-color: var(--white);
   color: var(--black);
   font-weight: 500;
-  transition: transform var(--transition-time);
-}
-
-.form-btn:hover {
-  transform: scale(1.05);
-}
-
-.footer-bottom {
-  width: 100%;
-  text-align: center;
   font-size: 14px;
-  margin-top: 20px;
-  color: var(--white-transparent);
+  border: none;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    opacity 0.3s ease;
+  flex-shrink: 0;
+}
+
+.form-btn:hover,
+.form-btn:focus {
+  opacity: 0.9;
+}
+
+/* Bottom section: brand + links + copyright */
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media screen and (min-width: 768px) {
+  .footer-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}
+
+/* Brand + socials */
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-logo {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 8px;
+}
+
+.footer-socials a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-socials a:hover,
+.footer-socials a:focus {
+  border-color: var(--white);
+}
+
+.footer-social-icon {
+  width: 16px;
+  height: 16px;
+  fill: var(--white);
+  transition: fill var(--transition-time);
+}
+
+/* Footer links */
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.footer-link {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: var(--white);
+}
+
+.footer-divider {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* Copyright */
+.copyright {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .copyright {
+    margin-left: auto;
+  }
 }

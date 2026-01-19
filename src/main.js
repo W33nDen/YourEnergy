@@ -1,46 +1,36 @@
-import { YourEnergyAPI } from './js/api.js';
-import * as storage from './js/storage.js';
-import { initFilters } from './js/filters.js'; // <-- Додали імпорт
+/**
+ * Main entry point - Your Energy SPA
+ * Імпортує всі модулі та ініціалізує їх при завантаженні DOM
+ */
+import './js/header.js';
+import { initQuote } from './js/quote.js';
+import { initFilters } from './js/filters.js';
+import { initFooter } from './js/footer.js';
+import { initModals } from './js/modal.js';
+import { initFavorites } from './js/favorites.js';
 
-const api = new YourEnergyAPI();
-
-// --- Quote of the Day Logic ---
-async function initQuote() {
-  // ... (весь код initQuote залишається без змін, я не буду його дублювати, щоб не плутати) ...
-  // Просто переконайся, що стара функція initQuote нікуди не зникла.
-  const quoteWrapper = document.getElementById('quote-wrapper');
-  const quoteText = document.getElementById('quote-text');
-  const quoteAuthor = document.getElementById('quote-author');
-
-  if (!quoteWrapper) return;
-
-  const today = new Date().toDateString();
-  const savedQuote = storage.load('quote');
-
-  if (savedQuote && savedQuote.date === today) {
-    console.log('Quote loaded from cache');
-    renderQuote(savedQuote);
-  } else {
-    try {
-      console.log('Fetching new quote...');
-      const data = await api.getQuote();
-      const quoteToSave = { ...data, date: today };
-      storage.save('quote', quoteToSave);
-      renderQuote(quoteToSave);
-    } catch (error) {
-      console.error('Failed to fetch quote:', error);
-    }
-  }
-
-  function renderQuote({ quote, author }) {
-    quoteText.textContent = quote;
-    quoteAuthor.textContent = author;
-    quoteWrapper.classList.remove('hidden');
-  }
-}
-
-// Запуск при завантаженні
+// Запуск при завантаженні DOM
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('🚀 DOM Content Loaded - JavaScript працює!');
+  console.log('📍 Поточна сторінка:', window.location.pathname);
+
+  // Ініціалізація Quote of the Day
   initQuote();
-  initFilters(); // <-- Додали виклик фільтрів
+
+  // Ініціалізація фільтрів (+ завантаження вправ за замовчуванням)
+  initFilters();
+
+  // Ініціалізація футера (підписка)
+  initFooter();
+
+  // Ініціалізація модальних вікон
+  initModals();
+
+  // Ініціалізація сторінки Favorites (якщо це вона)
+  const path = window.location.pathname;
+  if (path.includes('favorites.html')) {
+    initFavorites();
+  }
+
+  console.log('✅ Всі функції ініціалізовано!');
 });

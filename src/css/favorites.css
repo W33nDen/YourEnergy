@@ -1,0 +1,84 @@
+/* Favorites Section */
+.favorites {
+  padding-top: 40px;
+  padding-bottom: 80px;
+}
+
+.favorites-header {
+  margin-bottom: 32px;
+}
+
+.favorites-title {
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  color: var(--black);
+  margin-bottom: 32px; /* Consistent with exercises title */
+}
+
+@media (min-width: 768px) {
+  .favorites-title {
+    font-size: 48px;
+  }
+}
+
+.favorites-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; /* Consistent with exercises grid */
+}
+
+/* Empty State */
+.favorites-empty {
+  text-align: center;
+  padding: 60px 0;
+}
+
+.favorites-empty-text {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--black);
+  opacity: 0.8;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Override for exercise card in favorites */
+.favorites-container .exercise-card {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .favorites-container .exercise-card {
+    width: calc((100% - 16px) / 2);
+  }
+}
+
+@media (min-width: 1200px) {
+  .favorites-container .exercise-card {
+    width: calc((100% - 32px) / 3); /* Adjust for larger screens with 3 columns */
+  }
+}
+
+.remove-from-favorites-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: var(--black);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  color: var(--white);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.remove-from-favorites-btn:hover,
+.remove-from-favorites-btn:focus {
+  background-color: var(--dark-gray);
+}
+
+.icon-trash {
+  fill: currentColor;
+}
