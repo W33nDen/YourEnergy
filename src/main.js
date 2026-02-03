@@ -11,9 +11,6 @@ import { initFavorites } from './js/favorites.js';
 
 // Запуск при завантаженні DOM
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('🚀 DOM Content Loaded - JavaScript працює!');
-  console.log('📍 Поточна сторінка:', window.location.pathname);
-
   // Ініціалізація Quote of the Day
   initQuote();
 
@@ -31,6 +28,4 @@ document.addEventListener('DOMContentLoaded', () => {
   if (path.includes('favorites.html')) {
     initFavorites();
   }
-
-  console.log('✅ Всі функції ініціалізовано!');
 });

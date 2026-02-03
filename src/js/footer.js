@@ -1,12 +1,12 @@
-import { YourEnergyAPI } from "./api.js";
-import { showToast } from "./toast.js";
+import { YourEnergyAPI } from './api.js';
+import { showToast } from './toast.js';
 
 const api = new YourEnergyAPI();
-const form = document.getElementById("subscribe-form");
+const form = document.getElementById('subscribe-form');
 
 export function initFooter() {
   if (form) {
-    form.addEventListener("submit", handleSubscribe);
+    form.addEventListener('submit', handleSubscribe);
   }
 }
 
@@ -16,25 +16,26 @@ async function handleSubscribe(event) {
   const emailInput = form.elements.email;
   const email = emailInput.value.trim();
 
-  // Regex check (duplicating HTML pattern for JS validation)
-  const emailPattern = /^\w+(\.\w+)?@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+  // Standard email regex pattern matching the HTML pattern
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   if (!emailPattern.test(email)) {
-    showToast("Please enter a valid email address.", "error");
+    showToast('Please enter a valid email address.', 'error');
     return;
   }
 
   try {
     await api.createSubscription(email);
-    showToast("We're excited to have you on board!", "success");
+    showToast("We're excited to have you on board!", 'success');
     form.reset();
   } catch (error) {
-    console.error("Subscription failed:", error);
-    if (error.message.includes("409")) {
-      showToast("Subscription already exists.", "info");
-    }
-    else {
-      showToast("Something went wrong. Please try again.", "error");
+    // Handle specific API error codes
+    if (error.status === 409) {
+      showToast('You are already subscribed to our updates!', 'info');
+    } else if (error.status === 400) {
+      showToast('Invalid email format. Please check and try again.', 'error');
+    } else {
+      showToast('Something went wrong. Please try again later.', 'error');
     }
   }
 }

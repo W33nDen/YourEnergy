@@ -16,14 +16,17 @@ export class YourEnergyAPI {
     try {
       const response = await fetch(url, options);
 
-      // Якщо статус не ОК (не 200-299), кидаємо помилку
+      // Якщо статус не ОК (не 200-299), кидаємо помилку з кодом статусу
       if (!response.ok) {
-        throw new Error(`API Error: ${response.status} ${response.statusText}`);
+        const error = new Error(
+          `API Error: ${response.status} ${response.statusText}`
+        );
+        error.status = response.status; // Зберігаємо код статусу для обробки
+        throw error;
       }
 
       return await response.json();
     } catch (error) {
-      console.error(`Request failed: ${url}`, error);
       // Прокидаємо помилку далі, щоб обробити її в UI
       throw error;
     }

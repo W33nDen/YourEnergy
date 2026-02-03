@@ -3,8 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Your Energy - Favorites</title>
+    <meta
+      name="description"
+      content="Your saved favorite exercises for quick access. Build your personal workout collection."
+    />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,7 +21,6 @@
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css"
-      integrity="sha512-4xo8blKMVCiXpTaLzQSLSw3KFOVPWhm/TRtuPVc4WG6kU88HpqY30272MXaWHgCx8WnExxc8G5g66eItDC1t9g=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
@@ -26,8 +30,90 @@
     <load src="./partials/header.html" icon-path="img/sprite.svg#logo" />
 
     <main>
-      <load src="./partials/quote.html" />
-      <load src="./partials/favorites-list.html" />
+      <!-- Unique Favorites Hero - Light background -->
+      <section class="favorites-hero">
+        <div class="container favorites-hero-container">
+          <h1 class="favorites-hero-title">Favorites</h1>
+        </div>
+      </section>
+
+      <!-- Main content: Quote + Cards layout -->
+      <section class="favorites-main">
+        <div class="container favorites-layout">
+          <!-- Sidebar: Quote + Widgets -->
+          <aside class="favorites-sidebar">
+            <!-- Quote Card (Inline implementation to avoid layout conflicts) -->
+            <div class="quote-wrapper" id="quote-wrapper">
+              <div class="quote-content-inner">
+                <div class="quote-header-row">
+                  <div class="quote-icon-wrap">
+                    <svg width="20" height="20" class="icon-run">
+                      <use href="./img/sprite.svg#icon-run"></use>
+                    </svg>
+                  </div>
+                  <h3 class="quote-heading">Quote of the day</h3>
+                  <div class="quote-icon-wrap invert">
+                    <svg width="20" height="20" class="icon-quote">
+                      <use href="./img/sprite.svg#icon-quote"></use>
+                    </svg>
+                  </div>
+                </div>
+
+                <p class="quote-text" id="quote-text"></p>
+                <p class="quote-author" id="quote-author"></p>
+              </div>
+              <!-- Hidden image container just in case JS tries to target it, 
+                   but we ensure it's displayed none via CSS -->
+              <div class="quote-image" style="display: none"></div>
+            </div>
+
+            <!-- Widgets Row -->
+            <div class="favorites-widgets-row">
+              <div class="info-widget">
+                <div class="widget-header">
+                  <div class="widget-icon-wrap">
+                    <svg width="20" height="20" class="icon-run">
+                      <use href="./img/sprite.svg#icon-run"></use>
+                    </svg>
+                  </div>
+                  <div class="widget-title-wrap">
+                    <p class="widget-title">110 min</p>
+                    <p class="widget-desc">Daily norm of sports</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="photo-card">
+                <img
+                  src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=400&auto=format&fit=crop"
+                  srcset="
+                    https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=400&auto=format&fit=crop 1x,
+                    https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop 2x
+                  "
+                  alt="Workout partners"
+                  class="photo-card-img"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </aside>
+
+          <!-- Favorites cards -->
+          <div class="favorites-content">
+            <div class="favorites-container" id="favorites-container">
+              <!-- Favorites cards will be rendered here -->
+            </div>
+
+            <div class="favorites-empty hidden" id="favorites-empty">
+              <p class="favorites-empty-text">
+                It appears that you haven't added any exercises to your
+                favorites yet. To get started, you can add exercises that you
+                like to your favorites for easier access in the future.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <load src="./partials/footer.html" />

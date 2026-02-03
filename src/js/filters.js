@@ -25,7 +25,6 @@ let currentState = {
  * Головна функція ініціалізації фільтрів
  */
 export async function initFilters() {
-  console.log('🔧 initFilters started');
   if (!elements.filtersList) return;
 
   // 1. Додаємо слухача подій на кнопки фільтрів (делегування)
@@ -47,10 +46,7 @@ export async function initFilters() {
  * Load default exercises to show on page load
  */
 async function loadDefaultExercises() {
-  console.log('🏋️ loadDefaultExercises started');
-
   if (!elements.exercisesContainer) {
-    console.error('❌ Exercises container not found!');
     return;
   }
 
@@ -60,7 +56,6 @@ async function loadDefaultExercises() {
 
   try {
     const data = await api.getExercises({ limit: 10 });
-    console.log('✅ Exercises data received:', data);
 
     // Clear loading
     elements.exercisesContainer.innerHTML = '';
@@ -77,10 +72,7 @@ async function loadDefaultExercises() {
       const card = createExerciseCard(exercise);
       elements.exercisesContainer.insertAdjacentHTML('beforeend', card);
     });
-
-    console.log('✅ Default exercises rendered');
   } catch (error) {
-    console.error('❌ Error loading exercises:', error);
     elements.exercisesContainer.innerHTML =
       '<p class="loader-text">Failed to load exercises</p>';
   }
@@ -177,8 +169,6 @@ async function handlePaginationClick(event) {
  * Завантаження та рендер категорій
  */
 async function loadCategories() {
-  console.log('📂 Loading categories for:', currentState.filter);
-
   // Show loading
   elements.exercisesContainer.innerHTML =
     '<p class="loader-text">Loading categories...</p>';
@@ -190,8 +180,6 @@ async function loadCategories() {
       currentState.limit
     );
 
-    console.log('✅ Categories data received:', data);
-
     if (data.results.length === 0) {
       elements.exercisesContainer.innerHTML =
         '<p class="loader-text">Nothing found.</p>';
@@ -202,10 +190,9 @@ async function loadCategories() {
     // Render categories
     renderCategoriesMarkup(data.results);
 
-    // Render pagination
+    // Render pagination (click handling done via delegation in initFilters)
     renderPagination(elements.pagination, data.totalPages, Number(data.page));
   } catch (error) {
-    console.error('❌ Error loading categories:', error);
     elements.exercisesContainer.innerHTML =
       '<p class="loader-text" style="color: red">Something went wrong. Try reloading page.</p>';
     elements.pagination.innerHTML = '';
@@ -221,7 +208,6 @@ async function handleCategoryClick(event) {
   if (!card) return;
 
   const { filter, name } = card.dataset;
-  console.log('🏋️ Category clicked:', { filter, name });
 
   // Hide pagination
   elements.pagination.innerHTML = '';
@@ -234,10 +220,10 @@ async function handleCategoryClick(event) {
  * Створення HTML розмітки для списку категорій
  */
 function renderCategoriesMarkup(results) {
-  const markup = results
+  const cardsMarkup = results
     .map(
       item => `
-    <div class="category-card" 
+    <li class="category-card" 
          data-name="${item.name}" 
          data-filter="${item.filter}">
       <img class="category-img" src="${item.imgURL}" alt="${item.name}" loading="lazy">
@@ -245,10 +231,10 @@ function renderCategoriesMarkup(results) {
         <h3 class="category-title">${item.name}</h3>
         <p class="category-filter">${item.filter}</p>
       </div>
-    </div>
+    </li>
   `
     )
     .join('');
 
-  elements.exercisesContainer.innerHTML = `<div class="categories-list">${markup}</div>`;
+  elements.exercisesContainer.innerHTML = `<ul class="categories-list">${cardsMarkup}</ul>`;
 }

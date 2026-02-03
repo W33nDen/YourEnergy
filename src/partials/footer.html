@@ -1,8 +1,60 @@
 <footer class="footer">
   <div class="container footer-container">
-    <!-- Top row: heading + subscribe -->
-    <div class="footer-top">
-      <h2 class="footer-heading">Transforming your body shape with us</h2>
+    <!-- Main content: 3 columns on desktop -->
+    <div class="footer-main">
+      <!-- Left: Brand + socials -->
+      <div class="footer-brand">
+        <a class="footer-logo" href="./index.html">YOUR ENERGY</a>
+        <ul class="socials-list footer-socials">
+          <li class="socials-item">
+            <a
+              href="https://www.facebook.com/goITclub?locale=ua_UA"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link"
+              aria-label="Facebook"
+            >
+              <svg width="20" height="20" class="footer-social-icon">
+                <use href="./img/sprite.svg#icon-facebook"></use>
+              </svg>
+            </a>
+          </li>
+          <li class="socials-item">
+            <a
+              href="https://www.instagram.com/goitclub/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link"
+              aria-label="Instagram"
+            >
+              <svg width="20" height="20" class="footer-social-icon">
+                <use href="./img/sprite.svg#icon-instagram"></use>
+              </svg>
+            </a>
+          </li>
+          <li class="socials-item">
+            <a
+              href="https://www.youtube.com/GoIT"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-link"
+              aria-label="YouTube"
+            >
+              <svg width="20" height="20" class="footer-social-icon">
+                <use href="./img/sprite.svg#icon-youtube"></use>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Center: Heading -->
+      <h2 class="footer-heading">
+        Transforming your <span class="footer-heading-italic">body</span><br />
+        shape with us
+      </h2>
+
+      <!-- Right: Subscribe -->
       <div class="footer-subscribe">
         <p class="subscribe-text">Subscribe and learn about new exercises!</p>
         <form class="subscribe-form" id="subscribe-form">
@@ -13,7 +65,8 @@
               name="email"
               placeholder="Email"
               required
-              pattern="^[\w+(\.\w+)?]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"
+              pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+              title="Please enter a valid email address"
             />
           </label>
           <button class="form-btn" type="submit">Send</button>
@@ -21,49 +74,15 @@
       </div>
     </div>
 
-    <!-- Bottom row: brand + links -->
+    <!-- Bottom row: copyright + links -->
     <div class="footer-bottom">
-      <div class="footer-brand">
-        <a class="footer-logo" href="./index.html">YOUR ENERGY</a>
-        <div class="footer-socials">
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Instagram"
-          >
-            <svg width="20" height="20" class="footer-social-icon">
-              <use href="./img/sprite.svg#icon-instagram"></use>
-            </svg>
-          </a>
-          <a
-            href="https://facebook.com"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Facebook"
-          >
-            <svg width="20" height="20" class="footer-social-icon">
-              <use href="./img/sprite.svg#icon-facebook"></use>
-            </svg>
-          </a>
-          <a
-            href="https://youtube.com"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="YouTube"
-          >
-            <svg width="20" height="20" class="footer-social-icon">
-              <use href="./img/sprite.svg#icon-youtube"></use>
-            </svg>
-          </a>
-        </div>
-      </div>
+      <p class="copyright">Your Energy. All rights reserved.</p>
       <div class="footer-links">
         <a href="#" class="footer-link">Privacy Policy</a>
         <span class="footer-divider">/</span>
         <a href="#" class="footer-link">Terms of Service</a>
       </div>
-      <p class="copyright">©2023 YourEnergy. All rights reserved.</p>
+      <p class="copyright-year">©2023</p>
     </div>
   </div>
 </footer>

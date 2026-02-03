@@ -13,6 +13,11 @@ const pagination = document.getElementById('pagination');
 const searchForm = document.getElementById('search-form');
 const exercisesTitle = document.querySelector('.exercises-title');
 
+// Initialize pagination click handler (delegation)
+if (pagination) {
+  pagination.addEventListener('click', handleExercisePaginationClick);
+}
+
 // Стан модуля для завантаження вправ по категорії
 let exercisesState = {
   filter: '',
@@ -35,8 +40,6 @@ const FILTER_MAP = {
  * @param {string} name - Назва категорії (Abs, Back, Barbell тощо)
  */
 export async function loadExercises(filter, name) {
-  console.log('🏋️ loadExercises started for:', { filter, name });
-
   // Update category display (Exercises / Category)
   const currentCategory = document.getElementById('current-category');
   const categorySeparator = document.querySelector(
@@ -76,7 +79,6 @@ export async function loadExercises(filter, name) {
  */
 async function fetchAndRenderExercises() {
   if (!exercisesContainer) {
-    console.error('❌ Exercises container not found!');
     return;
   }
 
@@ -97,7 +99,6 @@ async function fetchAndRenderExercises() {
     }
 
     const data = await api.getExercises(params);
-    console.log('✅ Exercises data received:', data);
 
     if (!data.results || data.results.length === 0) {
       exercisesContainer.innerHTML =
@@ -108,15 +109,9 @@ async function fetchAndRenderExercises() {
     renderExercisesMarkup(data.results);
 
     if (pagination) {
-      renderPagination(
-        pagination,
-        data.totalPages,
-        Number(data.page),
-        handleExercisePaginationClick
-      );
+      renderPagination(pagination, data.totalPages, Number(data.page));
     }
   } catch (error) {
-    console.error('❌ Error loading exercises:', error);
     exercisesContainer.innerHTML =
       '<p class="loader-text" style="color: red">Failed to load exercises. Please try again.</p>';
   }
@@ -126,50 +121,51 @@ async function fetchAndRenderExercises() {
  * Рендер карток вправ
  */
 function renderExercisesMarkup(exercises) {
-  const markup = exercises
+  const cardsMarkup = exercises
     .map(
       ex => `
-    <div class="exercise-card" data-id="${ex._id}">
-      <div class="exercise-content">
-        <div class="exercise-left">
-          <div class="exercise-title-box">
-            <div class="icon-run-wrapper">
-               <svg class="icon-run" width="14" height="16">
-                <use href="./img/sprite.svg#icon-run"></use>
-              </svg>
-            </div>
-            <h3 class="exercise-name">${ex.name}</h3>
-          </div>
-          
-          <ul class="exercise-details">
-            <li class="detail-item">Burned calories: <span class="detail-value">${ex.burnedCalories} / ${ex.time} min</span></li>
-            <li class="detail-item">Body part: <span class="detail-value">${ex.bodyPart}</span></li>
-            <li class="detail-item">Target: <span class="detail-value">${ex.target}</span></li>
-          </ul>
-        </div>
-        
-        <div class="exercise-right">
-          <div class="workout-badge">WORKOUT</div>
+    <li class="exercise-card" data-id="${ex._id}">
+      <!-- Header: Badge + Rating | Start button -->
+      <div class="exercise-header">
+        <div class="exercise-header-left">
+          <span class="workout-badge">WORKOUT</span>
           <div class="rating-wrap">
             <span class="rating-value">${ex.rating.toFixed(1)}</span>
-            <svg class="rating-icon" width="18" height="18">
+            <svg class="rating-icon" width="14" height="14">
               <use href="./img/sprite.svg#icon-star"></use>
             </svg>
           </div>
-          <button class="start-btn" type="button" data-id="${ex._id}">
-            Start
-            <svg width="16" height="16" stroke="currentColor">
-              <use href="./img/sprite.svg#icon-arrow"></use>
-            </svg>
-          </button>
         </div>
+        <button class="start-btn" type="button" data-id="${ex._id}">
+          Start
+          <svg width="16" height="16">
+            <use href="./img/sprite.svg#icon-arrow"></use>
+          </svg>
+        </button>
       </div>
-    </div>
+      
+      <!-- Title with icon -->
+      <div class="exercise-title-box">
+        <div class="icon-run-wrapper">
+          <svg class="icon-run" width="14" height="14">
+            <use href="./img/sprite.svg#icon-run"></use>
+          </svg>
+        </div>
+        <h3 class="exercise-name">${ex.name}</h3>
+      </div>
+      
+      <!-- Details row -->
+      <ul class="exercise-details">
+        <li class="detail-item"><span class="detail-label">Burned calories:</span> <span class="detail-value">${ex.burnedCalories} / ${ex.time} min</span></li>
+        <li class="detail-item"><span class="detail-label">Body part:</span> <span class="detail-value">${ex.bodyPart}</span></li>
+        <li class="detail-item"><span class="detail-label">Target:</span> <span class="detail-value">${ex.target}</span></li>
+      </ul>
+    </li>
   `
     )
     .join('');
 
-  exercisesContainer.innerHTML = markup;
+  exercisesContainer.innerHTML = `<ul class="exercises-list">${cardsMarkup}</ul>`;
 }
 
 /**

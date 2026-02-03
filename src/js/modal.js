@@ -27,12 +27,11 @@ export function initModals() {
   elements.ratingStars.addEventListener('click', handleRatingStarsClick);
   elements.ratingForm.addEventListener('submit', handleRatingSubmit);
 
-  // Close with backdrop click
+  // Close with backdrop click (these stay attached - they check visibility internally)
   elements.exerciseModalBackdrop.addEventListener('click', handleBackdropClick);
   elements.ratingModalBackdrop.addEventListener('click', handleBackdropClick);
 
-  // Close with Escape key
-  document.addEventListener('keydown', handleKeyDown);
+  // Note: Escape key listener is added/removed dynamically in open/close functions
 }
 
 function handleBackdropClick(event) {
@@ -70,12 +69,15 @@ async function openExerciseModal(exerciseId) {
   elements.exerciseModalContent.innerHTML =
     '<p class="loader-text">Loading exercise details...</p>';
   elements.exerciseModalBackdrop.classList.remove('is-hidden');
+  document.body.style.overflow = 'hidden'; // Prevent background scroll
+
+  // Add Escape key listener when modal opens
+  document.addEventListener('keydown', handleKeyDown);
 
   try {
     const exerciseDetails = await api.getExerciseById(exerciseId);
     renderExerciseDetails(exerciseDetails);
   } catch (error) {
-    console.error('Error fetching exercise details:', error);
     elements.exerciseModalContent.innerHTML =
       '<p class="loader-text" style="color: red">Failed to load exercise details.</p>';
   }
@@ -85,6 +87,12 @@ function closeExerciseModal() {
   elements.exerciseModalBackdrop.classList.add('is-hidden');
   elements.exerciseModalContent.innerHTML = ''; // Clear content
   currentExerciseId = null;
+  document.body.style.overflow = ''; // Restore scroll
+
+  // Remove Escape key listener when modal closes (if rating modal is also closed)
+  if (elements.ratingModalBackdrop.classList.contains('is-hidden')) {
+    document.removeEventListener('keydown', handleKeyDown);
+  }
 }
 
 function renderStars(rating) {
@@ -106,9 +114,17 @@ function renderStars(rating) {
 }
 
 function renderExerciseDetails(exercise) {
+  const isFav = storage.isFavorite(exercise._id);
+  const favBtnText = isFav ? 'Remove from favorites' : 'Add to favorites';
+
   const markup = `
     <div class="modal-exercise-card">
-      <img class="modal-exercise-img" src="${exercise.gifUrl}" alt="${exercise.name}">
+      <!-- Left Column: Image -->
+      <div class="modal-image-wrap">
+        <img class="modal-exercise-img" src="${exercise.gifUrl}" alt="${exercise.name}">
+      </div>
+      
+      <!-- Right Column: Content -->
       <div class="modal-exercise-info">
         <h3 class="modal-exercise-name">${exercise.name}</h3>
         <div class="modal-rating-wrap">
@@ -117,31 +133,44 @@ function renderExerciseDetails(exercise) {
             ${renderStars(exercise.rating)}
           </div>
         </div>
-        <ul class="modal-exercise-details-list">
-          <li class="modal-detail-item">
-            <p class="modal-detail-label">Target:</p>
-            <p class="modal-detail-value">${exercise.target}</p>
-          </li>
-          <li class="modal-detail-item">
-            <p class="modal-detail-label">Body Part:</p>
-            <p class="modal-detail-value">${exercise.bodyPart}</p>
-          </li>
-          <li class="modal-detail-item">
-            <p class="modal-detail-label">Equipment:</p>
-            <p class="modal-detail-value">${exercise.equipment}</p>
-          </li>
-          <li class="modal-detail-item">
-            <p class="modal-detail-label">Popular:</p>
-            <p class="modal-detail-value">${exercise.popularity}</p>
-          </li>
-          <li class="modal-detail-item">
-            <p class="modal-detail-label">Burned Calories:</p>
-            <p class="modal-detail-value">${exercise.burnedCalories} / ${exercise.time} min</p>
-          </li>
-        </ul>
+        
+        <!-- Stats Grid -->
+        <div class="modal-stats-grid">
+          <div class="modal-stat-item">
+            <span class="modal-stat-label">Target</span>
+            <span class="modal-stat-value">${exercise.target}</span>
+          </div>
+          <div class="modal-stat-item">
+            <span class="modal-stat-label">Body Part</span>
+            <span class="modal-stat-value">${exercise.bodyPart}</span>
+          </div>
+          <div class="modal-stat-item">
+            <span class="modal-stat-label">Equipment</span>
+            <span class="modal-stat-value">${exercise.equipment}</span>
+          </div>
+          <div class="modal-stat-item">
+            <span class="modal-stat-label">Popular</span>
+            <span class="modal-stat-value">${exercise.popularity}</span>
+          </div>
+        </div>
+        
+        <!-- Burned Calories - Separate -->
+        <div class="modal-calories">
+          <span class="modal-calories-label">Burned calories</span>
+          <span class="modal-calories-value">${exercise.burnedCalories}/${exercise.time} min</span>
+        </div>
+        
+        <!-- Description -->
         <p class="modal-exercise-description">${exercise.description}</p>
+        
+        <!-- Buttons -->
         <div class="modal-buttons">
-          <button class="add-to-favorites-btn" type="button" data-id="${exercise._id}">Add to favorites</button>
+          <button class="add-to-favorites-btn" type="button" data-id="${exercise._id}">
+            ${favBtnText}
+            <svg class="heart-icon" width="18" height="18">
+              <use href="./img/sprite.svg#icon-heart"></use>
+            </svg>
+          </button>
           <button class="give-rating-btn" type="button" data-id="${exercise._id}">Give a rating</button>
         </div>
       </div>
@@ -160,8 +189,6 @@ function renderExerciseDetails(exercise) {
     '.add-to-favorites-btn'
   );
   if (addBtn) {
-    const isFav = storage.isFavorite(exercise._id);
-    addBtn.textContent = isFav ? 'Remove from favorites' : 'Add to favorites';
     addBtn.addEventListener('click', () =>
       handleFavoriteToggle(exercise, addBtn)
     );
@@ -170,30 +197,45 @@ function renderExerciseDetails(exercise) {
 
 function handleFavoriteToggle(exercise, button) {
   const isFav = storage.isFavorite(exercise._id);
+  const heartIcon = `<svg class="heart-icon" width="18" height="18"><use href="./img/sprite.svg#icon-heart"></use></svg>`;
+
   if (isFav) {
     storage.removeFavorite(exercise._id);
     showToast('Removed from favorites', 'success');
-    button.textContent = 'Add to favorites';
+    button.innerHTML = `Add to favorites ${heartIcon}`;
   } else {
     storage.addFavorite(exercise);
     showToast('Added to favorites!', 'success');
-    button.textContent = 'Remove from favorites';
+    button.innerHTML = `Remove from favorites ${heartIcon}`;
   }
 }
 
 function openRatingModal() {
   if (!currentExerciseId) return;
-  closeExerciseModal();
+
+  // Close exercise modal but keep currentExerciseId
+  const savedExerciseId = currentExerciseId;
+  elements.exerciseModalBackdrop.classList.add('is-hidden');
+  elements.exerciseModalContent.innerHTML = '';
+  currentExerciseId = savedExerciseId;
+
   elements.ratingModalBackdrop.classList.remove('is-hidden');
+  document.body.style.overflow = 'hidden'; // Keep scroll locked
   currentRating = 0; // Reset rating
   updateRatingStars();
   elements.ratingForm.reset();
+
+  // Ensure Escape listener is attached
+  document.addEventListener('keydown', handleKeyDown);
 }
 
 function closeRatingModal() {
   elements.ratingModalBackdrop.classList.add('is-hidden');
-  // Optionally re-open exercise modal after rating
-  // if (currentExerciseId) { openExerciseModal(currentExerciseId); }
+  currentExerciseId = null;
+  document.body.style.overflow = ''; // Restore scroll
+
+  // Remove Escape key listener when modal closes
+  document.removeEventListener('keydown', handleKeyDown);
 }
 
 function handleRatingStarsClick(event) {
@@ -239,7 +281,6 @@ async function handleRatingSubmit(event) {
     // Optionally re-open exercise modal with updated rating
     // await openExerciseModal(currentExerciseId);
   } catch (error) {
-    console.error('Error submitting rating:', error);
     showToast(
       'Failed to submit rating. ' + (error.message || 'Please try again.'),
       'error'

@@ -45,3 +45,7 @@ button {
   background: transparent;
   font-family: inherit;
 }
+
+.hidden {
+  display: none;
+}

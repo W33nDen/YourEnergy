@@ -43,7 +43,6 @@ async function initQuoteForFavoritesPage() {
       storage.save('quote', quoteToSave);
       renderQuote({ quote: quoteToSave.quote, author: quoteToSave.author });
     } catch (error) {
-      console.error('Failed to fetch quote on favorites page:', error);
       const fallbackQuote = {
         quote: "The only bad workout is the one that didn't happen.",
         author: 'Unknown',
@@ -69,10 +68,10 @@ function renderFavorites() {
   }
 
   elements.favoritesEmpty.classList.add('hidden');
-  const markup = favorites
+  const cardsMarkup = favorites
     .map(
       exercise => `
-    <div class="exercise-card" data-id="${exercise._id}">
+    <li class="exercise-card" data-id="${exercise._id}">
       <div class="exercise-content">
         <div class="exercise-left">
           <span class="workout-badge">Workout</span>
@@ -116,12 +115,12 @@ function renderFavorites() {
           </button>
         </div>
       </div>
-    </div>
+    </li>
     `
     )
     .join('');
 
-  elements.favoritesContainer.innerHTML = markup;
+  elements.favoritesContainer.innerHTML = `<ul class="favorites-list">${cardsMarkup}</ul>`;
 }
 
 function renderStars(rating) {
@@ -142,15 +141,15 @@ function renderStars(rating) {
 }
 
 function handleRemoveFavorite(event) {
-  const removeBtn = event.target.closest(".remove-from-favorites-btn");
+  const removeBtn = event.target.closest('.remove-from-favorites-btn');
   if (!removeBtn) return;
 
   const exerciseId = removeBtn.dataset.id;
   if (exerciseId) {
-    let favorites = storage.load("favorites") || [];
+    let favorites = storage.load('favorites') || [];
     favorites = favorites.filter(fav => fav._id !== exerciseId);
-    storage.save("favorites", favorites);
-    showToast("Exercise removed from favorites!", "success");
+    storage.save('favorites', favorites);
+    showToast('Exercise removed from favorites!', 'success');
     renderFavorites(); // Re-render the list
   }
 }
