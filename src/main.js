@@ -11,21 +11,19 @@ import { initFavorites } from './js/favorites.js';
 
 // Запуск при завантаженні DOM
 document.addEventListener('DOMContentLoaded', () => {
-  // Ініціалізація Quote of the Day
-  initQuote();
-
-  // Ініціалізація фільтрів (+ завантаження вправ за замовчуванням)
-  initFilters();
-
-  // Ініціалізація футера (підписка)
-  initFooter();
-
-  // Ініціалізація модальних вікон
-  initModals();
-
-  // Ініціалізація сторінки Favorites (якщо це вона)
   const path = window.location.pathname;
-  if (path.includes('favorites.html')) {
+  const isFavoritesPage = path.includes('favorites.html');
+
+  if (isFavoritesPage) {
+    // Favorites page only
     initFavorites();
+  } else {
+    // Home page only
+    initQuote();
+    initFilters();
+    initModals();
   }
+
+  // Common for all pages
+  initFooter();
 });

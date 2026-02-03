@@ -63,10 +63,10 @@
   font-weight: 400;
 }
 
-/* Social icons - Light gray background with dark icons */
+/* Social icons - Circular with border */
 .header-socials {
   display: flex;
-  gap: 12px;
+  gap: 8px;
   align-items: center;
   list-style: none;
   padding: 0;
@@ -79,13 +79,15 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  background-color: rgba(36, 36, 36, 0.05);
-  border-radius: 8px;
-  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: transparent;
+  border: 1px solid rgba(36, 36, 36, 0.2);
+  border-radius: 50%;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .social-link:hover {
-  background-color: rgba(36, 36, 36, 0.15);
+  border-color: var(--black);
+  background-color: rgba(36, 36, 36, 0.05);
 }
 
 .social-link svg {

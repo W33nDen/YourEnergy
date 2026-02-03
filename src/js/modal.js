@@ -15,21 +15,47 @@ const elements = {
   ratingStars: document.getElementById('rating-stars'),
   ratingValueSpan: document.querySelector('.rating-value'),
   exercisesContainer: document.getElementById('exercises-container'),
+  favoritesContainer: document.getElementById('favorites-container'),
 };
 
 let currentExerciseId = null;
 let currentRating = 0;
 
 export function initModals() {
-  elements.exercisesContainer.addEventListener('click', handleCardClick);
-  elements.exerciseModalCloseBtn.addEventListener('click', closeExerciseModal);
-  elements.ratingModalCloseBtn.addEventListener('click', closeRatingModal);
-  elements.ratingStars.addEventListener('click', handleRatingStarsClick);
-  elements.ratingForm.addEventListener('submit', handleRatingSubmit);
+  // Support both exercises and favorites pages
+  if (elements.exercisesContainer) {
+    elements.exercisesContainer.addEventListener('click', handleCardClick);
+  }
+  if (elements.favoritesContainer) {
+    elements.favoritesContainer.addEventListener('click', handleCardClick);
+  }
+
+  if (elements.exerciseModalCloseBtn) {
+    elements.exerciseModalCloseBtn.addEventListener(
+      'click',
+      closeExerciseModal
+    );
+  }
+  if (elements.ratingModalCloseBtn) {
+    elements.ratingModalCloseBtn.addEventListener('click', closeRatingModal);
+  }
+  if (elements.ratingStars) {
+    elements.ratingStars.addEventListener('click', handleRatingStarsClick);
+  }
+  if (elements.ratingForm) {
+    elements.ratingForm.addEventListener('submit', handleRatingSubmit);
+  }
 
   // Close with backdrop click (these stay attached - they check visibility internally)
-  elements.exerciseModalBackdrop.addEventListener('click', handleBackdropClick);
-  elements.ratingModalBackdrop.addEventListener('click', handleBackdropClick);
+  if (elements.exerciseModalBackdrop) {
+    elements.exerciseModalBackdrop.addEventListener(
+      'click',
+      handleBackdropClick
+    );
+  }
+  if (elements.ratingModalBackdrop) {
+    elements.ratingModalBackdrop.addEventListener('click', handleBackdropClick);
+  }
 
   // Note: Escape key listener is added/removed dynamically in open/close functions
 }
