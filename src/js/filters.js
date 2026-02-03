@@ -86,7 +86,7 @@ function createExerciseCard(exercise) {
           <div class="exercise-title-box">
             <div class="icon-run-wrapper">
               <svg class="icon-run" width="12" height="12">
-                <use href="./img/sprite.svg#icon-run"></use>
+                <use href="/YourEnergy/sprite.svg#icon-run"></use>
               </svg>
             </div>
             <h3 class="exercise-name">${exercise.name}</h3>
@@ -108,13 +108,13 @@ function createExerciseCard(exercise) {
           <div class="rating-wrap">
             <span>${exercise.rating.toFixed(1)}</span>
             <svg width="14" height="14">
-              <use href="./img/sprite.svg#icon-star"></use>
+              <use href="/YourEnergy/sprite.svg#icon-star"></use>
             </svg>
           </div>
           <button class="start-btn" data-id="${exercise._id}">
             Start
             <svg width="14" height="14">
-              <use href="./img/sprite.svg#icon-arrow"></use>
+              <use href="/YourEnergy/sprite.svg#icon-arrow"></use>
             </svg>
           </button>
         </div>
