@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build --base=/YourEnergy/",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "vite build --base=/YourEnergy/ && npx gh-pages -d dist"
   },
   "devDependencies": {
     "glob": "^11.0.0",
