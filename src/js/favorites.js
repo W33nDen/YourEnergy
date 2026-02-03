@@ -80,11 +80,6 @@ function renderFavorites() {
             ${renderStars(exercise.rating)}
           </div>
           <div class="exercise-title-box">
-            <div class="icon-run-wrapper">
-              <svg class="icon-run" width="12" height="12">
-                <use href="/YourEnergy/sprite.svg#icon-run"></use>
-              </svg>
-            </div>
             <h3 class="exercise-name">${exercise.name}</h3>
           </div>
           <ul class="exercise-details">
