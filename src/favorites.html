@@ -11,12 +11,29 @@
       content="Your saved favorite exercises for quick access. Build your personal workout collection."
     />
 
+    <!-- Preconnect to critical origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preconnect"
+      href="https://your-energy.b.goit.study"
+      crossorigin
+    />
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+
+    <!-- Fonts with display=swap for better performance -->
+    <link
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
 
     <link
       rel="stylesheet"
@@ -27,7 +44,10 @@
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <load src="./partials/header.html" icon-path="img/YourEnergy/sprite.svg#logo" />
+    <load
+      src="./partials/header.html"
+      icon-path="img/YourEnergy/sprite.svg#logo"
+    />
 
     <main>
       <!-- Unique Favorites Hero - Light background -->

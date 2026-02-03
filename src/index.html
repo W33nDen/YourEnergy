@@ -34,12 +34,38 @@
 
     <title>Your Energy - Get Body in Shape, Stay Healthy</title>
 
+    <!-- Preconnect to critical origins -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preconnect"
+      href="https://your-energy.b.goit.study"
+      crossorigin
+    />
+    <link rel="preconnect" href="https://ftp.goit.study" crossorigin />
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+
+    <!-- Preload LCP image -->
+    <link
+      rel="preload"
+      as="image"
+      href="./img/women-sportswear-outdoors.webp"
+      fetchpriority="high"
+    />
+
+    <!-- Fonts with display=swap for better performance -->
+    <link
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
 
     <link
       rel="stylesheet"
@@ -50,7 +76,10 @@
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <load src="./partials/header.html" icon-path="img/YourEnergy/sprite.svg#logo" />
+    <load
+      src="./partials/header.html"
+      icon-path="img/YourEnergy/sprite.svg#logo"
+    />
 
     <main>
       <load src="./partials/hero.html" />
