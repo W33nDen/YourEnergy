@@ -14,11 +14,16 @@ const elements = {
   searchForm: document.getElementById('search-form'),
 };
 
+// Get adaptive limit based on screen width
+function getFiltersLimit() {
+  return window.innerWidth >= 768 ? 12 : 9;
+}
+
 // Зберігаємо поточний стан
 let currentState = {
   filter: 'Muscles',
   page: 1,
-  limit: 12,
+  limit: getFiltersLimit(),
 };
 
 /**

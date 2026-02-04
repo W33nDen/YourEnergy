@@ -226,11 +226,11 @@ function handleFavoriteToggle(exercise, button) {
   const heartIcon = `<svg class="heart-icon" width="18" height="18"><use href="/YourEnergy/sprite.svg#icon-heart"></use></svg>`;
 
   if (isFav) {
-    storage.removeFavorite(exercise._id);
+    storage.removeFavoriteId(exercise._id);
     showToast('Removed from favorites', 'success');
     button.innerHTML = `Add to favorites ${heartIcon}`;
   } else {
-    storage.addFavorite(exercise);
+    storage.addFavoriteId(exercise._id);
     showToast('Added to favorites!', 'success');
     button.innerHTML = `Remove from favorites ${heartIcon}`;
   }
@@ -296,20 +296,26 @@ async function handleRatingSubmit(event) {
     return;
   }
 
+  const exerciseIdToReopen = currentExerciseId;
+
   try {
-    const response = await api.addRating(currentExerciseId, {
+    await api.patchRating(currentExerciseId, {
       rate: currentRating,
       email,
       review,
     });
     showToast('Thank you for your rating!', 'success');
     closeRatingModal();
-    // Optionally re-open exercise modal with updated rating
-    // await openExerciseModal(currentExerciseId);
+    // Re-open exercise modal with updated rating
+    await openExerciseModal(exerciseIdToReopen);
   } catch (error) {
-    showToast(
-      'Failed to submit rating. ' + (error.message || 'Please try again.'),
-      'error'
-    );
+    if (error.status === 409) {
+      showToast('You have already rated this exercise.', 'info');
+    } else {
+      showToast(
+        'Failed to submit rating. ' + (error.message || 'Please try again.'),
+        'error'
+      );
+    }
   }
 }

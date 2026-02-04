@@ -12,7 +12,11 @@ const elements = {
 };
 
 export async function initFavorites() {
-  renderFavorites();
+  // Migrate old favorites format (full objects) to new format (only IDs)
+  storage.migrateOldFavorites();
+
+  // Render favorites from API
+  await renderFavorites();
 
   // Add event listener for removing from favorites
   elements.favoritesContainer.addEventListener('click', handleRemoveFavorite);
@@ -58,17 +62,56 @@ async function initQuoteForFavoritesPage() {
   }
 }
 
-function renderFavorites() {
-  const favorites = storage.load('favorites') || [];
+async function renderFavorites() {
+  const favoriteIds = storage.getFavoriteIds();
 
-  if (favorites.length === 0) {
-    elements.favoritesEmpty.classList.remove('hidden');
-    elements.favoritesContainer.innerHTML = '';
+  if (favoriteIds.length === 0) {
+    showEmptyMessage();
     return;
   }
 
+  // Show loading
   elements.favoritesEmpty.classList.add('hidden');
-  const cardsMarkup = favorites
+  elements.favoritesContainer.innerHTML =
+    '<p class="loader-text">Loading your favorites...</p>';
+
+  try {
+    // Fetch all exercises by ID from API
+    const exercisePromises = favoriteIds.map(id =>
+      api.getExerciseById(id).catch(() => null)
+    );
+    const exercises = await Promise.all(exercisePromises);
+
+    // Filter out failed requests (null values)
+    const validExercises = exercises.filter(ex => ex !== null);
+
+    // If all requests failed or no valid exercises
+    if (validExercises.length === 0) {
+      showEmptyMessage();
+      return;
+    }
+
+    // Update storage with only valid IDs (cleanup)
+    const validIds = validExercises.map(ex => ex._id);
+    storage.save('favorites_ids', validIds);
+
+    // Render cards
+    renderFavoriteCards(validExercises);
+  } catch (error) {
+    elements.favoritesContainer.innerHTML =
+      '<p class="loader-text" style="color: red">Failed to load favorites. Please try again.</p>';
+  }
+}
+
+function showEmptyMessage() {
+  elements.favoritesEmpty.classList.remove('hidden');
+  elements.favoritesContainer.innerHTML = '';
+}
+
+function renderFavoriteCards(exercises) {
+  elements.favoritesEmpty.classList.add('hidden');
+
+  const cardsMarkup = exercises
     .map(
       exercise => `
     <li class="exercise-card" data-id="${exercise._id}">
@@ -135,16 +178,23 @@ function renderStars(rating) {
   return starsMarkup;
 }
 
-function handleRemoveFavorite(event) {
+async function handleRemoveFavorite(event) {
   const removeBtn = event.target.closest('.remove-from-favorites-btn');
   if (!removeBtn) return;
 
   const exerciseId = removeBtn.dataset.id;
   if (exerciseId) {
-    let favorites = storage.load('favorites') || [];
-    favorites = favorites.filter(fav => fav._id !== exerciseId);
-    storage.save('favorites', favorites);
+    storage.removeFavoriteId(exerciseId);
     showToast('Exercise removed from favorites!', 'success');
-    renderFavorites(); // Re-render the list
+
+    // Check if there are any favorites left
+    const remainingIds = storage.getFavoriteIds();
+    if (remainingIds.length === 0) {
+      // Show empty message immediately
+      showEmptyMessage();
+    } else {
+      // Re-render with remaining exercises
+      await renderFavorites();
+    }
   }
 }

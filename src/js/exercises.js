@@ -18,13 +18,18 @@ if (pagination) {
   pagination.addEventListener('click', handleExercisePaginationClick);
 }
 
+// Get adaptive limit based on screen width
+function getExercisesLimit() {
+  return window.innerWidth >= 768 ? 10 : 8;
+}
+
 // Стан модуля для завантаження вправ по категорії
 let exercisesState = {
   filter: '',
   name: '',
   keyword: '',
   page: 1,
-  limit: 10,
+  limit: getExercisesLimit(),
 };
 
 // Мапа фільтрів для API параметрів

@@ -38,28 +38,58 @@ export const remove = key => {
   }
 };
 
-// Favorites helpers
-const FAVORITES_KEY = 'favorites';
+// Favorites helpers - now stores only IDs
+const FAVORITES_KEY = 'favorites_ids';
 
-export function getFavorites() {
+/**
+ * Get favorite exercise IDs from LocalStorage
+ * @returns {string[]} Array of exercise IDs
+ */
+export function getFavoriteIds() {
   return load(FAVORITES_KEY) || [];
 }
 
-export function addFavorite(exercise) {
-  const favorites = getFavorites();
-  if (!favorites.some(item => item._id === exercise._id)) {
-    favorites.push(exercise);
-    save(FAVORITES_KEY, favorites);
+/**
+ * Add exercise ID to favorites
+ * @param {string} id - Exercise ID
+ */
+export function addFavoriteId(id) {
+  const favoriteIds = getFavoriteIds();
+  if (!favoriteIds.includes(id)) {
+    favoriteIds.push(id);
+    save(FAVORITES_KEY, favoriteIds);
   }
 }
 
-export function removeFavorite(id) {
-  const favorites = getFavorites();
-  const filtered = favorites.filter(item => item._id !== id);
+/**
+ * Remove exercise ID from favorites
+ * @param {string} id - Exercise ID
+ */
+export function removeFavoriteId(id) {
+  const favoriteIds = getFavoriteIds();
+  const filtered = favoriteIds.filter(favId => favId !== id);
   save(FAVORITES_KEY, filtered);
 }
 
+/**
+ * Check if exercise is in favorites
+ * @param {string} id - Exercise ID
+ * @returns {boolean}
+ */
 export function isFavorite(id) {
-  const favorites = getFavorites();
-  return favorites.some(item => item._id === id);
+  const favoriteIds = getFavoriteIds();
+  return favoriteIds.includes(id);
+}
+
+// Migration helper - convert old format to new (only IDs)
+export function migrateOldFavorites() {
+  const oldFavorites = load('favorites');
+  if (oldFavorites && Array.isArray(oldFavorites) && oldFavorites.length > 0) {
+    // Check if old format (objects with _id)
+    if (typeof oldFavorites[0] === 'object' && oldFavorites[0]._id) {
+      const ids = oldFavorites.map(item => item._id);
+      save(FAVORITES_KEY, ids);
+      remove('favorites'); // Remove old key
+    }
+  }
 }

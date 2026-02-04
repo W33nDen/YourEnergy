@@ -51,14 +51,33 @@
 
 .stars-wrapper label svg {
   fill: currentColor;
+  width: 24px;
+  height: 24px;
 }
 
-/* Star selection logic */
+/* Star selection logic - using radio buttons */
 .stars-wrapper input:checked ~ label,
 .stars-wrapper input:checked + label,
 .stars-wrapper label:hover,
 .stars-wrapper label:hover ~ label {
-  color: #eea10c; /* Gold/Yellow */
+  color: var(--yellow, #eea10c); /* Gold/Yellow */
+}
+
+/* JS-based star interaction */
+.star-icon {
+  fill: var(--light-gray, #d9d9d9);
+  cursor: pointer;
+  transition: fill 0.2s ease;
+  width: 24px;
+  height: 24px;
+}
+
+.star-icon.filled {
+  fill: var(--yellow, #eea10c);
+}
+
+.star-icon:hover {
+  fill: var(--yellow, #eea10c);
 }
 
 .rating-input {
