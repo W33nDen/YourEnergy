@@ -128,12 +128,12 @@ function renderStars(rating) {
 
   for (let i = 0; i < 5; i++) {
     if (i < fullStars) {
-      starsMarkup += `<svg class="star-icon filled" width="14" height="14"><use href="/sprite.svg#icon-star"></use></svg>`;
+      starsMarkup += `<svg class="star-icon filled" width="14" height="14"><use href="/YourEnergy/sprite.svg#icon-star"></use></svg>`;
     } else if (hasHalfStar && i === fullStars) {
       // This template doesn't have half stars, so we'll just use full for simplicity or leave empty
-      starsMarkup += `<svg class="star-icon" width="14" height="14"><use href="/sprite.svg#icon-star"></use></svg>`;
+      starsMarkup += `<svg class="star-icon" width="14" height="14"><use href="/YourEnergy/sprite.svg#icon-star"></use></svg>`;
     } else {
-      starsMarkup += `<svg class="star-icon" width="14" height="14"><use href="/sprite.svg#icon-star"></use></svg>`;
+      starsMarkup += `<svg class="star-icon" width="14" height="14"><use href="/YourEnergy/sprite.svg#icon-star"></use></svg>`;
     }
   }
   return starsMarkup;
@@ -194,7 +194,7 @@ function renderExerciseDetails(exercise) {
           <button class="add-to-favorites-btn" type="button" data-id="${exercise._id}">
             ${favBtnText}
             <svg class="heart-icon" width="18" height="18">
-              <use href="/sprite.svg#icon-heart"></use>
+              <use href="/YourEnergy/sprite.svg#icon-heart"></use>
             </svg>
           </button>
           <button class="give-rating-btn" type="button" data-id="${exercise._id}">Give a rating</button>
@@ -223,7 +223,7 @@ function renderExerciseDetails(exercise) {
 
 function handleFavoriteToggle(exercise, button) {
   const isFav = storage.isFavorite(exercise._id);
-  const heartIcon = `<svg class="heart-icon" width="18" height="18"><use href="/sprite.svg#icon-heart"></use></svg>`;
+  const heartIcon = `<svg class="heart-icon" width="18" height="18"><use href="/YourEnergy/sprite.svg#icon-heart"></use></svg>`;
 
   if (isFav) {
     storage.removeFavoriteId(exercise._id);

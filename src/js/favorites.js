@@ -143,12 +143,12 @@ function renderFavoriteCards(exercises) {
         <div class="exercise-right">
           <button class="start-btn" type="button" data-id="${exercise._id}">Start
             <svg width="14" height="14">
-              <use href="/sprite.svg#icon-arrow"></use>
+              <use href="/YourEnergy/sprite.svg#icon-arrow"></use>
             </svg>
           </button>
           <button class="remove-from-favorites-btn" type="button" data-id="${exercise._id}">
             <svg class="icon-trash" width="16" height="16">
-              <use href="/sprite.svg#icon-trash"></use>
+              <use href="/YourEnergy/sprite.svg#icon-trash"></use>
             </svg>
           </button>
         </div>
@@ -168,11 +168,11 @@ function renderStars(rating) {
 
   for (let i = 0; i < 5; i++) {
     if (i < fullStars) {
-      starsMarkup += `<svg class="star-icon filled" width="14" height="14"><use href="/sprite.svg#icon-star"></use></svg>`;
+      starsMarkup += `<svg class="star-icon filled" width="14" height="14"><use href="/YourEnergy/sprite.svg#icon-star"></use></svg>`;
     } else if (hasHalfStar && i === fullStars) {
-      starsMarkup += `<svg class="star-icon" width="14" height="14"><use href="/sprite.svg#icon-star"></use></svg>`;
+      starsMarkup += `<svg class="star-icon" width="14" height="14"><use href="/YourEnergy/sprite.svg#icon-star"></use></svg>`;
     } else {
-      starsMarkup += `<svg class="star-icon" width="14" height="14"><use href="/sprite.svg#icon-star"></use></svg>`;
+      starsMarkup += `<svg class="star-icon" width="14" height="14"><use href="/YourEnergy/sprite.svg#icon-star"></use></svg>`;
     }
   }
   return starsMarkup;
