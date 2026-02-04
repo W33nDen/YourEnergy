@@ -137,14 +137,14 @@ function renderExercisesMarkup(exercises) {
           <div class="rating-wrap">
             <span class="rating-value">${ex.rating.toFixed(1)}</span>
             <svg class="rating-icon" width="14" height="14">
-              <use href="/YourEnergy/sprite.svg#icon-star"></use>
+              <use href="/sprite.svg#icon-star"></use>
             </svg>
           </div>
         </div>
         <button class="start-btn" type="button" data-id="${ex._id}">
           Start
           <svg width="16" height="16">
-            <use href="/YourEnergy/sprite.svg#icon-arrow"></use>
+            <use href="/sprite.svg#icon-arrow"></use>
           </svg>
         </button>
       </div>
@@ -153,7 +153,7 @@ function renderExercisesMarkup(exercises) {
       <div class="exercise-title-box">
         <div class="icon-run-wrapper">
           <svg class="icon-run" width="14" height="14">
-            <use href="/YourEnergy/sprite.svg#icon-run"></use>
+            <use href="/sprite.svg#icon-run"></use>
           </svg>
         </div>
         <h3 class="exercise-name">${ex.name}</h3>

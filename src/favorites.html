@@ -44,10 +44,7 @@
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <load
-      src="./partials/header.html"
-      icon-path="img/YourEnergy/sprite.svg#logo"
-    />
+    <load src="./partials/header.html" icon-path="img/sprite.svg#logo" />
 
     <main>
       <!-- Unique Favorites Hero - Light background -->
@@ -68,13 +65,13 @@
                 <div class="quote-header-row">
                   <div class="quote-icon-wrap">
                     <svg width="20" height="20" class="icon-run">
-                      <use href="/YourEnergy/sprite.svg#icon-run"></use>
+                      <use href="/sprite.svg#icon-run"></use>
                     </svg>
                   </div>
                   <h2 class="quote-heading">Quote of the day</h2>
                   <div class="quote-icon-wrap invert">
                     <svg width="20" height="20" class="icon-quote">
-                      <use href="/YourEnergy/sprite.svg#icon-quote"></use>
+                      <use href="/sprite.svg#icon-quote"></use>
                     </svg>
                   </div>
                 </div>
@@ -93,7 +90,7 @@
                 <div class="widget-header">
                   <div class="widget-icon-wrap">
                     <svg width="20" height="20" class="icon-run">
-                      <use href="/YourEnergy/sprite.svg#icon-run"></use>
+                      <use href="/sprite.svg#icon-run"></use>
                     </svg>
                   </div>
                   <div class="widget-title-wrap">
@@ -104,16 +101,21 @@
               </div>
 
               <div class="photo-card">
-                <img
-                  src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=400&auto=format&fit=crop"
-                  srcset="
-                    https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=400&auto=format&fit=crop 1x,
-                    https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop 2x
-                  "
-                  alt="Workout partners"
-                  class="photo-card-img"
-                  loading="lazy"
-                />
+                <picture>
+                  <source
+                    srcset="
+                      ./img/women-sportswear-working-out-1x.png 1x,
+                      ./img/women-sportswear-working-out-2x.png 2x
+                    "
+                    type="image/png"
+                  />
+                  <img
+                    src="./img/women-sportswear-working-out-1x.png"
+                    alt="Woman working out"
+                    class="photo-card-img"
+                    loading="lazy"
+                  />
+                </picture>
               </div>
             </div>
           </aside>
