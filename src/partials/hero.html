@@ -20,28 +20,48 @@
       </div>
       <div class="hero-decoration">
         <div class="hero-small-img">
-          <img
-            src="./img/young-women-fitness-outdoors.png"
-            alt="Women doing fitness outdoors"
-            loading="eager"
-          />
+          <picture>
+            <source
+              srcset="
+                ./img/young-women-fitness-outdoors-1x.png 1x,
+                ./img/young-women-fitness-outdoors-2x.png 2x
+              "
+              type="image/png"
+            />
+            <img
+              src="./img/young-women-fitness-outdoors-1x.png"
+              alt="Women doing fitness outdoors"
+              loading="eager"
+              width="168"
+              height="100"
+            />
+          </picture>
         </div>
-        <div class="hero-tags">
-          <span class="tag">#Sport</span>
-          <span class="tag">#Healthy</span>
-          <span class="tag">#Workout</span>
-          <span class="tag">#Diet</span>
-        </div>
+        <ul class="hero-tags">
+          <li><span class="tag">#Sport</span></li>
+          <li><span class="tag">#Healthy</span></li>
+          <li><span class="tag">#Workout</span></li>
+          <li><span class="tag">#Diet</span></li>
+        </ul>
       </div>
     </div>
     <div class="hero-banner">
-      <img
-        class="hero-img-wide"
-        src="./img/women-sportswear-outdoors.webp"
-        alt="Two women high-fiving outdoors"
-        loading="eager"
-        fetchpriority="high"
-      />
+      <picture>
+        <source
+          srcset="
+            ./img/women-sportswear-outdoors-1x.webp 1x,
+            ./img/women-sportswear-outdoors-2x.png  2x
+          "
+          type="image/webp"
+        />
+        <img
+          class="hero-img-wide"
+          src="./img/women-sportswear-outdoors-1x.webp"
+          alt="Two women high-fiving outdoors"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </picture>
     </div>
   </div>
 </section>

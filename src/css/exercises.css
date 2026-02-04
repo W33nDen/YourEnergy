@@ -366,51 +366,7 @@
   margin: 0;
 }
 
-/* Search & Grid */
-.search-form {
-  margin-bottom: 32px;
-  position: relative;
-  max-width: 320px;
-  margin-left: auto;
-  display: none;
-}
-
-.search-form.visible {
-  display: block;
-}
-
-.search-input {
-  width: 100%;
-  padding: 12px 45px 12px 20px;
-  border-radius: 30px;
-  border: 1px solid rgba(36, 36, 36, 0.2);
-  outline: none;
-  font-size: 14px;
-  background: #fff;
-}
-
-.search-input::placeholder {
-  color: rgba(36, 36, 36, 0.4);
-}
-
-.search-btn {
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.search-btn svg {
-  stroke: var(--black);
-  fill: none;
-}
+/* Search form styles are defined above in .exercises-controls section */
 
 .exercises-wrapper {
   display: flex;

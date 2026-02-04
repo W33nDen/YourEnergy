@@ -255,13 +255,17 @@ function openRatingModal() {
   document.addEventListener('keydown', handleKeyDown);
 }
 
-function closeRatingModal() {
+async function closeRatingModal() {
+  const exerciseIdToReopen = currentExerciseId;
   elements.ratingModalBackdrop.classList.add('is-hidden');
-  currentExerciseId = null;
-  document.body.style.overflow = ''; // Restore scroll
 
-  // Remove Escape key listener when modal closes
-  document.removeEventListener('keydown', handleKeyDown);
+  // Return to exercise modal if we have the ID
+  if (exerciseIdToReopen) {
+    await openExerciseModal(exerciseIdToReopen);
+  } else {
+    document.body.style.overflow = ''; // Restore scroll
+    document.removeEventListener('keydown', handleKeyDown);
+  }
 }
 
 function handleRatingStarsClick(event) {
