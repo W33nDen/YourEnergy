@@ -49,7 +49,7 @@
     <link
       rel="preload"
       as="image"
-      href="/YourEnergy/assets/women-sportswear-outdoors-MbRiWBs-.webp"
+      href="./img/women-sportswear-outdoors.webp"
       fetchpriority="high"
     />
 
@@ -72,9 +72,9 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css"
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
-    />
-    <script type="module" crossorigin src="/YourEnergy/assets/main-CydEw6yg.js"></script>
-    <link rel="stylesheet" crossorigin href="/YourEnergy/assets/main-CGbGy0-8.css">
+    />
+    <script type="module" crossorigin src="/YourEnergy/assets/main-fIcN4mic.js"></script>
+    <link rel="stylesheet" crossorigin href="/YourEnergy/assets/main-Dw2Y91-W.css">
   </head>
   <body>
     <header class="header">
@@ -245,28 +245,42 @@
       </div>
       <div class="hero-decoration">
         <div class="hero-small-img">
-          <img
-            src="/YourEnergy/assets/young-women-fitness-outdoors-CxMyr4LU.png"
-            alt="Women doing fitness outdoors"
-            loading="eager"
-          />
+          <picture>
+            <source
+              srcset="/YourEnergy/assets/young-women-fitness-outdoors-1x-CxMyr4LU.png 1x, /YourEnergy/assets/young-women-fitness-outdoors-2x-CevlP9uy.png 2x"
+              type="image/png"
+            />
+            <img
+              src="/YourEnergy/assets/young-women-fitness-outdoors-1x-CxMyr4LU.png"
+              alt="Women doing fitness outdoors"
+              loading="eager"
+              width="168"
+              height="100"
+            />
+          </picture>
         </div>
-        <div class="hero-tags">
-          <span class="tag">#Sport</span>
-          <span class="tag">#Healthy</span>
-          <span class="tag">#Workout</span>
-          <span class="tag">#Diet</span>
-        </div>
+        <ul class="hero-tags">
+          <li><span class="tag">#Sport</span></li>
+          <li><span class="tag">#Healthy</span></li>
+          <li><span class="tag">#Workout</span></li>
+          <li><span class="tag">#Diet</span></li>
+        </ul>
       </div>
     </div>
     <div class="hero-banner">
-      <img
-        class="hero-img-wide"
-        src="/YourEnergy/assets/women-sportswear-outdoors-MbRiWBs-.webp"
-        alt="Two women high-fiving outdoors"
-        loading="eager"
-        fetchpriority="high"
-      />
+      <picture>
+        <source
+          srcset="/YourEnergy/assets/women-sportswear-outdoors-1x-MbRiWBs-.webp 1x, /YourEnergy/assets/women-sportswear-outdoors-2x-DZtrY9eY.png 2x"
+          type="image/webp"
+        />
+        <img
+          class="hero-img-wide"
+          src="/YourEnergy/assets/women-sportswear-outdoors-1x-MbRiWBs-.webp"
+          alt="Two women high-fiving outdoors"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </picture>
     </div>
   </div>
 </section>
@@ -338,7 +352,7 @@
 
         <div class="photo-card">
           <img
-            src="/YourEnergy/assets/women-sportswear-break-D63oJ74w.png"
+            src="./img/women-sportswear-break.png"
             alt="Two women with water bottles"
             class="photo-card-img"
             loading="lazy"
@@ -538,6 +552,6 @@
   </div>
 </div>
 
-
+
   </body>
 </html>
