@@ -150,4 +150,4 @@ var _=e=>{throw TypeError(e)};var O=(e,a,t)=>a.has(e)||_("Cannot "+t);var N=(e,a
       </div>
     </li>
     `).join("");u.favoritesContainer.innerHTML=`<ul class="favorites-list">${a}</ul>`}function Ae(e){let a="";const t=Math.floor(e),n=e%1!==0;for(let s=0;s<5;s++)s<t?a+='<svg class="star-icon filled" width="14" height="14"><use href="/YourEnergy/sprite.svg#icon-star"></use></svg>':a+='<svg class="star-icon" width="14" height="14"><use href="/YourEnergy/sprite.svg#icon-star"></use></svg>';return a}async function Re(e){const a=e.target.closest(".remove-from-favorites-btn");if(!a)return;const t=a.dataset.id;t&&(V(t),d("Exercise removed from favorites!","success"),M().length===0?T():await ae())}document.addEventListener("DOMContentLoaded",()=>{window.location.pathname.includes("favorites.html")?Fe():(oe(),ve(),X()),Ee()});
-//# sourceMappingURL=main-Cl-yzE8I.js.map
+//# sourceMappingURL=main-R9avdFZn.js.map
