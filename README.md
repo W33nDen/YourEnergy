@@ -1,54 +1,57 @@
 # YourEnergy
 
-Веб-застосунок для пошуку та збереження фітнес-вправ з можливістю фільтрації за
-м'язами, частинами тіла та обладнанням.
+A responsive web app for finding and saving fitness exercises. Built as a personal project during the GoIT JavaScript course.
 
-## 🚀 Демо
+**Live demo:** https://w33nden.github.io/YourEnergy/
 
-[Live Page](https://your-username.github.io/YourEnergy/)
+## Features
 
-## 📋 Функціонал
+- Browse exercises by muscle group, body part or equipment
+- Search exercises by keyword
+- Pagination, with the number of cards adapted to the screen size
+- Exercise details in a modal window
+- Rate an exercise with stars
+- Save favorites in the browser (localStorage) and view them on a separate Favorites page
+- Quote of the day from the API, cached per day
+- Email subscription form with validation and toast messages
+- Responsive layout with Retina images
 
-- Перегляд каталогу вправ з фільтрацією
-- Пошук вправ за ключовими словами
-- Детальний перегляд кожної вправи з GIF-анімацією
-- Додавання вправ до обраних (збереження в localStorage)
-- Оцінювання вправ
-- Цитата дня з API
-- Підписка на оновлення
+## Tech stack
 
-## 🛠️ Технології
+- HTML5, CSS3 (Flexbox, Grid, media queries)
+- JavaScript (ES6+, modules)
+- Vite
+- Your Energy REST API (https://your-energy.b.goit.study/api-docs/)
 
-- HTML5 (семантична розмітка)
-- CSS3 (Flexbox, Grid, Media Queries)
-- JavaScript (ES6+, модульна архітектура)
-- Vite (збірка проєкту)
-- REST API (Your Energy API)
-
-## 📁 Структура проєкту
+## Project structure
 
 ```
 src/
-├── css/           # Стилі
-├── js/            # JavaScript модулі
-├── partials/      # HTML компоненти
-├── img/           # Зображення та спрайти
-└── index.html     # Головна сторінка
+├── css/            styles
+├── js/             JavaScript modules (api, filters, exercises, modal, favorites, quote, footer)
+├── partials/       HTML components
+├── img/            images and SVG sprite
+├── index.html      home page
+└── favorites.html  favorites page
 ```
 
-## 🏃 Запуск проєкту
+## Getting started
+
+Requires Node.js and npm.
 
 ```bash
-# Встановлення залежностей
-npm install
-
-# Режим розробки
-npm run dev
-
-# Збірка для продакшн
-npm run build
+git clone https://github.com/W33nDen/YourEnergy.git
+cd YourEnergy
+npm install      # install dependencies
+npm run dev      # start the dev server
+npm run build    # production build into dist/
+npm run preview  # preview the build locally
 ```
 
-## 👥 Команда
+## Deployment
 
-GoIT JavaScript Course - Командний проєкт
+The site is deployed to GitHub Pages. A GitHub Actions workflow builds the project and publishes `dist/` to the `gh-pages` branch on every push to `main`.
+
+## Author
+
+Denys Uzhvenko, https://github.com/W33nDen
